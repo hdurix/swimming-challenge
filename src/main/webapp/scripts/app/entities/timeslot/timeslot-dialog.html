@@ -1,0 +1,126 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myTimeslotLabel">Create or edit a Timeslot</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="timeslot.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_startTime">StartTime</label>
+            <input type="text" class="form-control" name="startTime" id="field_startTime"
+                    ng-model="timeslot.startTime"
+                    required />
+            <div ng-show="editForm.startTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.startTime.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_endTime">EndTime</label>
+            <input type="text" class="form-control" name="endTime" id="field_endTime"
+                    ng-model="timeslot.endTime"
+                    required />
+            <div ng-show="editForm.endTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.endTime.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_payed">Payed</label>
+            <input type="checkbox" class="form-control" name="payed" id="field_payed"
+                    ng-model="timeslot.payed"
+                     />
+            <div ng-show="editForm.payed.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.payed.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_reserved">Reserved</label>
+            <input type="checkbox" class="form-control" name="reserved" id="field_reserved"
+                    ng-model="timeslot.reserved"
+                     />
+            <div ng-show="editForm.reserved.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.reserved.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_teamName">TeamName</label>
+            <input type="text" class="form-control" name="teamName" id="field_teamName"
+                    ng-model="timeslot.teamName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_swimmer1">Swimmer1</label>
+            <input type="text" class="form-control" name="swimmer1" id="field_swimmer1"
+                    ng-model="timeslot.swimmer1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_swimmer2">Swimmer2</label>
+            <input type="text" class="form-control" name="swimmer2" id="field_swimmer2"
+                    ng-model="timeslot.swimmer2"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_swimmer3">Swimmer3</label>
+            <input type="text" class="form-control" name="swimmer3" id="field_swimmer3"
+                    ng-model="timeslot.swimmer3"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_swimmer4">Swimmer4</label>
+            <input type="text" class="form-control" name="swimmer4" id="field_swimmer4"
+                    ng-model="timeslot.swimmer4"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_version">Version</label>
+            <input type="number" class="form-control" name="version" id="field_version"
+                    ng-model="timeslot.version"
+                    required />
+            <div ng-show="editForm.version.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.version.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.version.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_user">user</label>
+            <select class="form-control" id="field_user" name="user" ng-model="timeslot.user" ng-options="user as user.login for user in users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

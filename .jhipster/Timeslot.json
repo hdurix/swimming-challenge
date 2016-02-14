@@ -1,0 +1,82 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "startTime",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "endTime",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "payed",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "reserved",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "teamName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "swimmer1",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "swimmer2",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "swimmer3",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "swimmer4",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "version",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160214102737",
+    "dto": "no",
+    "service": "serviceClass",
+    "pagination": "no"
+}

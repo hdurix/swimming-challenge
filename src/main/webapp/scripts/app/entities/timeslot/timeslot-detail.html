@@ -1,0 +1,110 @@
+
+<div>
+    <h2><span>Timeslot</span> {{timeslot.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>StartTime</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{timeslot.startTime}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>EndTime</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{timeslot.endTime}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Payed</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{timeslot.payed}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Reserved</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{timeslot.reserved}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TeamName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{timeslot.teamName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Swimmer1</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{timeslot.swimmer1}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Swimmer2</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{timeslot.swimmer2}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Swimmer3</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{timeslot.swimmer3}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Swimmer4</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{timeslot.swimmer4}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Version</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{timeslot.version}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>user</span>
+                </td>
+                <td>
+                    {{timeslot.user.login}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
