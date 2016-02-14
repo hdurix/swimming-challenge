@@ -92,6 +92,22 @@
                      />
         </div>
         <div class="form-group">
+            <label class="control-label" for="field_line">Line</label>
+            <input type="number" class="form-control" name="line" id="field_line"
+                    ng-model="timeslot.line"
+                    required />
+            <div ng-show="editForm.line.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.line.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.line.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label" for="field_version">Version</label>
             <input type="number" class="form-control" name="version" id="field_version"
                     ng-model="timeslot.version"

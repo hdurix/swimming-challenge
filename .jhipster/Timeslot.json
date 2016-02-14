@@ -68,6 +68,14 @@
         },
         {
             "fieldId": 10,
+            "fieldName": "line",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+		{
+            "fieldId": 11,
             "fieldName": "version",
             "fieldType": "Long",
             "fieldValidateRules": [

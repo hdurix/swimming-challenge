@@ -6,7 +6,7 @@
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="timeslot.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span 
+                    <span
                        >Create new Timeslot
                     </span>
                 </button>
@@ -28,13 +28,14 @@
                     <th><span>Swimmer2</span></th>
                     <th><span>Swimmer3</span></th>
                     <th><span>Swimmer4</span></th>
+                    <th><span>Line</span></th>
                     <th><span>Version</span></th>
                     <th><span>user</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="timeslot in timeslots track by timeslot.id">
+                <tr ng-repeat="timeslot in vm.timeslots track by timeslot.id">
                     <td><a ui-sref="timeslot.detail({id:timeslot.id})">{{timeslot.id}}</a></td>
                     <td>{{timeslot.startTime}}</td>
                     <td>{{timeslot.endTime}}</td>
@@ -45,6 +46,7 @@
                     <td>{{timeslot.swimmer2}}</td>
                     <td>{{timeslot.swimmer3}}</td>
                     <td>{{timeslot.swimmer4}}</td>
+                    <td>{{timeslot.line}}</td>
                     <td>{{timeslot.version}}</td>
                     <td>
                         {{timeslot.user.login}}
@@ -53,7 +55,7 @@
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="timeslot.detail({id:timeslot.id})"
-                                    class="btn btn-info btn-sm"> 
+                                    class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
@@ -65,7 +67,7 @@
                             </button>
                             <button type="submit"
                                     ui-sref="timeslot.delete({id:timeslot.id})"
-                                    class="btn btn-danger btn-sm">                                    
+                                    class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>

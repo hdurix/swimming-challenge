@@ -55,7 +55,7 @@ To setup this project in Jenkins, use the following configuration:
 
 * Project name: `swimmingChallenge`
 * Source Code Management
-    * Git Repository: `git@github.com:xxxx/swimmingChallenge.git`
+    * Git Repository: `git@github.com:hdurix/swimmingChallenge.git`
     * Branches to build: `*/master`
     * Additional Behaviours: `Wipe out repository & force clone`
 * Build Triggers

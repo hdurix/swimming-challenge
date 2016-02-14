@@ -63,6 +63,9 @@ public class TimeslotResourceIntTest {
     private static final String DEFAULT_SWIMMER4 = "AAAAA";
     private static final String UPDATED_SWIMMER4 = "BBBBB";
 
+    private static final Integer DEFAULT_LINE = 1;
+    private static final Integer UPDATED_LINE = 2;
+
     private static final Long DEFAULT_VERSION = 1L;
     private static final Long UPDATED_VERSION = 2L;
 
@@ -104,6 +107,7 @@ public class TimeslotResourceIntTest {
         timeslot.setSwimmer2(DEFAULT_SWIMMER2);
         timeslot.setSwimmer3(DEFAULT_SWIMMER3);
         timeslot.setSwimmer4(DEFAULT_SWIMMER4);
+        timeslot.setLine(DEFAULT_LINE);
         timeslot.setVersion(DEFAULT_VERSION);
     }
 
@@ -132,6 +136,7 @@ public class TimeslotResourceIntTest {
         assertThat(testTimeslot.getSwimmer2()).isEqualTo(DEFAULT_SWIMMER2);
         assertThat(testTimeslot.getSwimmer3()).isEqualTo(DEFAULT_SWIMMER3);
         assertThat(testTimeslot.getSwimmer4()).isEqualTo(DEFAULT_SWIMMER4);
+        assertThat(testTimeslot.getLine()).isEqualTo(DEFAULT_LINE);
         assertThat(testTimeslot.getVersion()).isEqualTo(DEFAULT_VERSION);
     }
 
@@ -209,6 +214,24 @@ public class TimeslotResourceIntTest {
 
     @Test
     @Transactional
+    public void checkLineIsRequired() throws Exception {
+        int databaseSizeBeforeTest = timeslotRepository.findAll().size();
+        // set the field null
+        timeslot.setLine(null);
+
+        // Create the Timeslot, which fails.
+
+        restTimeslotMockMvc.perform(post("/api/timeslots")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(timeslot)))
+                .andExpect(status().isBadRequest());
+
+        List<Timeslot> timeslots = timeslotRepository.findAll();
+        assertThat(timeslots).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void checkVersionIsRequired() throws Exception {
         int databaseSizeBeforeTest = timeslotRepository.findAll().size();
         // set the field null
@@ -245,6 +268,7 @@ public class TimeslotResourceIntTest {
                 .andExpect(jsonPath("$.[*].swimmer2").value(hasItem(DEFAULT_SWIMMER2.toString())))
                 .andExpect(jsonPath("$.[*].swimmer3").value(hasItem(DEFAULT_SWIMMER3.toString())))
                 .andExpect(jsonPath("$.[*].swimmer4").value(hasItem(DEFAULT_SWIMMER4.toString())))
+                .andExpect(jsonPath("$.[*].line").value(hasItem(DEFAULT_LINE)))
                 .andExpect(jsonPath("$.[*].version").value(hasItem(DEFAULT_VERSION.intValue())));
     }
 
@@ -268,6 +292,7 @@ public class TimeslotResourceIntTest {
             .andExpect(jsonPath("$.swimmer2").value(DEFAULT_SWIMMER2.toString()))
             .andExpect(jsonPath("$.swimmer3").value(DEFAULT_SWIMMER3.toString()))
             .andExpect(jsonPath("$.swimmer4").value(DEFAULT_SWIMMER4.toString()))
+            .andExpect(jsonPath("$.line").value(DEFAULT_LINE))
             .andExpect(jsonPath("$.version").value(DEFAULT_VERSION.intValue()));
     }
 
@@ -297,6 +322,7 @@ public class TimeslotResourceIntTest {
         timeslot.setSwimmer2(UPDATED_SWIMMER2);
         timeslot.setSwimmer3(UPDATED_SWIMMER3);
         timeslot.setSwimmer4(UPDATED_SWIMMER4);
+        timeslot.setLine(UPDATED_LINE);
         timeslot.setVersion(UPDATED_VERSION);
 
         restTimeslotMockMvc.perform(put("/api/timeslots")
@@ -317,6 +343,7 @@ public class TimeslotResourceIntTest {
         assertThat(testTimeslot.getSwimmer2()).isEqualTo(UPDATED_SWIMMER2);
         assertThat(testTimeslot.getSwimmer3()).isEqualTo(UPDATED_SWIMMER3);
         assertThat(testTimeslot.getSwimmer4()).isEqualTo(UPDATED_SWIMMER4);
+        assertThat(testTimeslot.getLine()).isEqualTo(UPDATED_LINE);
         assertThat(testTimeslot.getVersion()).isEqualTo(UPDATED_VERSION);
     }
 

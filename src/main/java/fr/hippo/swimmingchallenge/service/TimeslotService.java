@@ -19,10 +19,10 @@ import java.util.Optional;
 public class TimeslotService {
 
     private final Logger log = LoggerFactory.getLogger(TimeslotService.class);
-    
+
     @Inject
     private TimeslotRepository timeslotRepository;
-    
+
     /**
      * Save a timeslot.
      * @return the persisted entity
@@ -37,7 +37,7 @@ public class TimeslotService {
      *  get all the timeslots.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Timeslot> findAll() {
         log.debug("Request to get all Timeslots");
         List<Timeslot> result = timeslotRepository.findAll();
@@ -48,18 +48,10 @@ public class TimeslotService {
      *  get one timeslot by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Timeslot findOne(Long id) {
         log.debug("Request to get Timeslot : {}", id);
         Timeslot timeslot = timeslotRepository.findOne(id);
         return timeslot;
-    }
-
-    /**
-     *  delete the  timeslot by id.
-     */
-    public void delete(Long id) {
-        log.debug("Request to delete Timeslot : {}", id);
-        timeslotRepository.delete(id);
     }
 }

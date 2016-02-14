@@ -27,27 +27,9 @@ import java.util.Optional;
 public class TimeslotResource {
 
     private final Logger log = LoggerFactory.getLogger(TimeslotResource.class);
-        
+
     @Inject
     private TimeslotService timeslotService;
-    
-    /**
-     * POST  /timeslots -> Create a new timeslot.
-     */
-    @RequestMapping(value = "/timeslots",
-        method = RequestMethod.POST,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<Timeslot> createTimeslot(@Valid @RequestBody Timeslot timeslot) throws URISyntaxException {
-        log.debug("REST request to save Timeslot : {}", timeslot);
-        if (timeslot.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("timeslot", "idexists", "A new timeslot cannot already have an ID")).body(null);
-        }
-        Timeslot result = timeslotService.save(timeslot);
-        return ResponseEntity.created(new URI("/api/timeslots/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("timeslot", result.getId().toString()))
-            .body(result);
-    }
 
     /**
      * PUT  /timeslots -> Updates an existing timeslot.
@@ -59,7 +41,7 @@ public class TimeslotResource {
     public ResponseEntity<Timeslot> updateTimeslot(@Valid @RequestBody Timeslot timeslot) throws URISyntaxException {
         log.debug("REST request to update Timeslot : {}", timeslot);
         if (timeslot.getId() == null) {
-            return createTimeslot(timeslot);
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("timeslot", "idinexists", "A timeslot needs to have an ID")).body(null);
         }
         Timeslot result = timeslotService.save(timeslot);
         return ResponseEntity.ok()
@@ -94,18 +76,5 @@ public class TimeslotResource {
                 result,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    /**
-     * DELETE  /timeslots/:id -> delete the "id" timeslot.
-     */
-    @RequestMapping(value = "/timeslots/{id}",
-        method = RequestMethod.DELETE,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<Void> deleteTimeslot(@PathVariable Long id) {
-        log.debug("REST request to delete Timeslot : {}", id);
-        timeslotService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("timeslot", id.toString())).build();
     }
 }

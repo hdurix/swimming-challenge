@@ -13,7 +13,7 @@ angular.module('swimmingchallengeApp')
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/entities/timeslot/timeslots.html',
-                        controller: 'TimeslotController'
+                        controller: 'TimeslotController as vm'
                     }
                 },
                 resolve: {
@@ -38,41 +38,6 @@ angular.module('swimmingchallengeApp')
                     }]
                 }
             })
-            .state('timeslot.new', {
-                parent: 'timeslot',
-                url: '/new',
-                data: {
-                    authorities: ['ROLE_USER'],
-                },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    $uibModal.open({
-                        templateUrl: 'scripts/app/entities/timeslot/timeslot-dialog.html',
-                        controller: 'TimeslotDialogController',
-                        size: 'lg',
-                        resolve: {
-                            entity: function () {
-                                return {
-                                    startTime: null,
-                                    endTime: null,
-                                    payed: false,
-                                    reserved: false,
-                                    teamName: null,
-                                    swimmer1: null,
-                                    swimmer2: null,
-                                    swimmer3: null,
-                                    swimmer4: null,
-                                    version: null,
-                                    id: null
-                                };
-                            }
-                        }
-                    }).result.then(function(result) {
-                        $state.go('timeslot', null, { reload: true });
-                    }, function() {
-                        $state.go('timeslot');
-                    })
-                }]
-            })
             .state('timeslot.edit', {
                 parent: 'timeslot',
                 url: '/{id}/edit',
@@ -84,29 +49,6 @@ angular.module('swimmingchallengeApp')
                         templateUrl: 'scripts/app/entities/timeslot/timeslot-dialog.html',
                         controller: 'TimeslotDialogController',
                         size: 'lg',
-                        resolve: {
-                            entity: ['Timeslot', function(Timeslot) {
-                                return Timeslot.get({id : $stateParams.id});
-                            }]
-                        }
-                    }).result.then(function(result) {
-                        $state.go('timeslot', null, { reload: true });
-                    }, function() {
-                        $state.go('^');
-                    })
-                }]
-            })
-            .state('timeslot.delete', {
-                parent: 'timeslot',
-                url: '/{id}/delete',
-                data: {
-                    authorities: ['ROLE_USER'],
-                },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    $uibModal.open({
-                        templateUrl: 'scripts/app/entities/timeslot/timeslot-delete-dialog.html',
-                        controller: 'TimeslotDeleteController',
-                        size: 'md',
                         resolve: {
                             entity: ['Timeslot', function(Timeslot) {
                                 return Timeslot.get({id : $stateParams.id});

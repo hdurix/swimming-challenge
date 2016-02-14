@@ -24,42 +24,51 @@
             <column name="start_time" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="end_time" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="payed" type="bit">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="reserved" type="bit">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="team_name" type="varchar(255)"/>
-            
+
             <column name="swimmer1" type="varchar(255)"/>
-            
+
             <column name="swimmer2" type="varchar(255)"/>
-            
+
             <column name="swimmer3" type="varchar(255)"/>
-            
+
             <column name="swimmer4" type="varchar(255)"/>
-            
+
+            <column name="line" type="integer">
+                <constraints nullable="false" />
+            </column>
+
             <column name="version" type="bigint">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="user_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="timeslot"
                                  constraintName="fk_timeslot_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/timeslots.csv"
+                  separator=";"
+                  tableName="timeslot"/>
 
     </changeSet>
 </databaseChangeLog>

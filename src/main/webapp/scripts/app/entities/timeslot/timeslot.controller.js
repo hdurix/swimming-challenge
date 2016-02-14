@@ -1,24 +1,37 @@
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('swimmingchallengeApp')
-    .controller('TimeslotController', function ($scope, $state, Timeslot) {
+    angular.module('swimmingchallengeApp')
+        .controller('TimeslotController', TimeslotController);
 
-        $scope.timeslots = [];
-        $scope.loadAll = function() {
-            Timeslot.query(function(result) {
-               $scope.timeslots = result;
+    function TimeslotController($state, Timeslot) {
+
+        var vm = this;
+
+        vm.clear = clear;
+        vm.loadAll = loadAll;
+        vm.refresh = refresh;
+        vm.timeslots = [];
+
+        activate();
+
+        function activate() {
+            loadAll();
+        }
+
+        function loadAll() {
+            Timeslot.query(function (result) {
+                vm.timeslots = result;
             });
-        };
-        $scope.loadAll();
+        }
 
+        function refresh() {
+            loadAll();
+            clear();
+        }
 
-        $scope.refresh = function () {
-            $scope.loadAll();
-            $scope.clear();
-        };
-
-        $scope.clear = function () {
-            $scope.timeslot = {
+        function clear() {
+            vm.timeslot = {
                 startTime: null,
                 endTime: null,
                 payed: false,
@@ -28,8 +41,10 @@ angular.module('swimmingchallengeApp')
                 swimmer2: null,
                 swimmer3: null,
                 swimmer4: null,
+                line: null,
                 version: null,
                 id: null
             };
-        };
-    });
+        }
+    }
+})();
