@@ -35,8 +35,6 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
-    mail:
-        host: localhost
     messages:
         cache-seconds: 1
     thymeleaf:
@@ -53,8 +51,6 @@ server:
 # ===================================================================
 
 jhipster:
-    mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: swimmingChallenge@localhost
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         spark:

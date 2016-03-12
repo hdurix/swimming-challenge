@@ -1,7 +1,9 @@
 <div>
-    <h2>Timeslots</h2>
+    <h2>Planning de la soirée</h2>
+    <h5>Ci dessous se trouve le planning de la soirée de natation pour le Défi Anthony.</h5>
+    <h5>Pour réserver un nouveau créneau, vous pouvez cliquer sur un créneau disponible.</h5>
     <jh-alert></jh-alert>
-    <div class="table-responsive" ng-repeat="tbt in vm.timeslotsByTime">
+    <div ng-repeat="tbt in vm.timeslotsByTime">
         <table class="jh-table table challenge-table">
             <thead>
             <tr>
@@ -17,112 +19,120 @@
                 <td ng-repeat="timeslot in timeslots" class="challenge-td {{vm.getClass(timeslot)}}"
                     data-tooltip="{{vm.getTooltip(timeslot)}}" data-tooltip-placement="top"
                     tooltip-append-to-body="true" ng-click="vm.currentTimeslot = timeslot">
-
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <div ng-if="vm.currentTimeslot" class="well well-sm"  ng-switch="vm.currentTimeslot.reserved">
+    <div ng-if="vm.currentTimeslot" class="well well-sm row"  ng-switch="vm.currentTimeslot.reserved">
 
-        <form class="form-horizontal form-challenge">
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Créneau</label>
-                <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <h4 ng-switch-when="true">Créneau réservé par {{vm.currentTimeslot.user.displayName}}</h4>
+                <h4 ng-switch-when="false">Réservation de ce créneau :</h4>
             </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Ligne</label>
-                <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
-            </div>
-        </form>
+            <div class="col-sm-8">
+                <form class="form-horizontal form-challenge form-challenge-static">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Créneau</label>
+                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Ligne</label>
+                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
+                    </div>
+                </form>
 
-        <form class="form-horizontal form-challenge" ng-switch-when="true">
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Réservé</label>
-                <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.reserved ? "Oui" : "Non"}}</p></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Payé</label>
-                <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.payed ? "Oui" : "Non"}}</p></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Nom d'équipe</label>
-                <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.teamName}}</p></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Nageur 1</label>
-                <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer1}}</p></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Nageur 2</label>
-                <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer2}}</p></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Nageur 3</label>
-                <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer3}}</p></div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Nageur 4</label>
-                <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer4}}</p></div>
-            </div>
-        </form>
-        <form name="editForm" role="form" class="form-horizontal form-challenge" novalidate ng-submit="vm.saveTimeslot()"
-              show-validation ng-switch-when="false">
-            <jh-alert-error></jh-alert-error>
-            <div class="form-group">
-                <label class="col-sm-4 control-label" for="field_teamName">Nom d'équipe</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control input-sm" name="teamName" id="field_teamName"
-                           ng-model="vm.currentTimeslot.teamName"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label" for="field_swimmer1">Nageur 1</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control input-sm" name="swimmer1" id="field_swimmer1"
-                           ng-model="vm.currentTimeslot.swimmer1"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label" for="field_swimmer2">Nageur 2</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control input-sm" name="swimmer2" id="field_swimmer2"
-                           ng-model="vm.currentTimeslot.swimmer2"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label" for="field_swimmer3">Nageur 3</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control input-sm" name="swimmer3" id="field_swimmer3"
-                           ng-model="vm.currentTimeslot.swimmer3"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label" for="field_swimmer4">Nageur 4</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control input-sm" name="swimmer4" id="field_swimmer4"
-                           ng-model="vm.currentTimeslot.swimmer4"/>
-                </div>
-            </div>
+                <form class="form-horizontal form-challenge form-challenge-static" ng-switch-when="true">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Nom d'équipe</label>
+                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.teamName}}</p></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Capitaine</label>
+                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.user.displayName}}</p></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Réservé</label>
+                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.reserved ? "Oui" : "Non"}}</p></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Payé</label>
+                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.payed ? "Oui" : "Non"}}</p></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Nageur 1</label>
+                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer1}}</p></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Nageur 2</label>
+                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer2}}</p></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Nageur 3</label>
+                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer3}}</p></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Nageur 4</label>
+                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer4}}</p></div>
+                    </div>
+                </form>
+                <form name="editForm" role="form" class="form-horizontal form-challenge" novalidate ng-submit="vm.saveTimeslot()"
+                      show-validation ng-switch-when="false" ng-switch="vm.connected">
+                    <div ng-switch-when="false">
+                        Pour continuer la réservation de ce créneau, merci de bien vouloir vous
+                        <a class="hand" ng-click="vm.goToLogin()">connecter</a>.
+                    </div>
+                    <div ng-switch-when="true">
+                        <jh-alert-error></jh-alert-error>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="field_teamName">Nom d'équipe</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control input-sm" name="teamName" id="field_teamName"
+                                       ng-model="vm.currentTimeslot.teamName"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="field_swimmer1">Nageur 1</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control input-sm" name="swimmer1" id="field_swimmer1"
+                                       ng-model="vm.currentTimeslot.swimmer1"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="field_swimmer2">Nageur 2</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control input-sm" name="swimmer2" id="field_swimmer2"
+                                       ng-model="vm.currentTimeslot.swimmer2"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="field_swimmer3">Nageur 3</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control input-sm" name="swimmer3" id="field_swimmer3"
+                                       ng-model="vm.currentTimeslot.swimmer3"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="field_swimmer4">Nageur 4</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control input-sm" name="swimmer4" id="field_swimmer4"
+                                       ng-model="vm.currentTimeslot.swimmer4"/>
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label class="col-sm-4 control-label" for="field_user">user</label>
-                <div class="col-sm-8">
-                    <select class="form-control" id="field_user" name="user" ng-model="vm.currentTimeslot.user"
-                            ng-options="user as user.login for user in vm.users track by user.id">
-                        <option value=""></option>
-                    </select>
-                </div>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.currentTimeslot = undefined">
+                                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Annuler</span>
+                            </button>
+                            <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Sauvegarder</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="text-right">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.currentTimeslot = undefined">
-                    <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Annuler</span>
-                </button>
-                <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Sauvegarder</span>
-                </button>
-            </div>
-        </form>
+        </div>
     </div>
 
 </div>

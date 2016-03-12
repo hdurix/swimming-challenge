@@ -1,45 +1,47 @@
 <div>
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <h1>Sign in</h1>
+        <div class="col-md-8 col-md-offset-2">
+            <h1>Connexion</h1>
 
             <div class="alert alert-danger" ng-show="authenticationError">
-                <strong>Failed to sign in!</strong> Please check your credentials and try again.
+                <strong>L'authentification a echoué !</strong> Merci de vérifier votre pseudo et mot de passe et réessayer.
             </div>
         </div>
+        <div class="col-md-4">
+            <h4>Vous pouvez vous connecter simplement avec votre compte Google ou Facebook :</h4>
+            <br/>
+            <jh-social ng-provider="google"></jh-social>
+            <jh-social ng-provider="facebook"></jh-social>
+            <jh-social ng-provider="twitter"></jh-social>
+            <!-- jhipster-needle-add-social-button -->
+        </div>
         <div class="col-md-4 col-md-offset-2">
+            <h4>Sinon, vous pouvez vous connecter avec votre login et votre mot de passe :</h4>
             <form class="form" role="form" ng-submit="login($event)">
                 <div class="form-group">
-                    <label for="username">Login</label>
+                    <label for="username">Pseudo</label>
                     <input type="text" class="form-control" id="username" placeholder="Your username" ng-model="username">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Mot de passe</label>
                     <input type="password" class="form-control" id="password" placeholder="Your password"
                            ng-model="password">
                 </div>
                 <div class="form-group">
                     <label for="rememberMe">
                         <input type="checkbox" id="rememberMe" ng-model="rememberMe" checked>
-                        <span>Remember me</span>
+                        <span>Se souvenir de moi</span>
                     </label>
                 </div>
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="submit" class="btn btn-primary">Se connecter</button>
             </form>
             <p></p>
             <div class="alert alert-warning">
-                <a class="alert-link" href="#/reset/request">Did you forget your password?</a>
+                <a class="alert-link" href="#/reset/request">Vous avez oublié votre mot de passe ?</a>
             </div>
             <div class="alert alert-warning">
-                You don't have an account yet? <a class="alert-link" href="#/register">Register a new account</a>
+                Vous n'avez pas encore de compte ? <a class="alert-link" href="#/register">Créer un nouveau compte</a>
             </div>
-        </div>
-        <div class="col-md-4">
-            <br/>
-            <jh-social ng-provider="google"></jh-social>
-            <jh-social ng-provider="facebook"></jh-social>
-            <jh-social ng-provider="twitter"></jh-social>
-            <!-- jhipster-needle-add-social-button -->
         </div>
     </div>
 </div>

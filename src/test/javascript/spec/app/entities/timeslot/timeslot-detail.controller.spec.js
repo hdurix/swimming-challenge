@@ -13,7 +13,7 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockTimeslot = jasmine.createSpy('MockTimeslot');
             MockUser = jasmine.createSpy('MockUser');
-            
+
 
             var locals = {
                 '$scope': $scope,
@@ -26,19 +26,6 @@ describe('Controller Tests', function() {
                 $injector.get('$controller')("TimeslotDetailController", locals);
             };
         }));
-
-
-        describe('Root Scope Listening', function() {
-            it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'swimmingchallengeApp:timeslotUpdate';
-
-                createController();
-                expect($rootScope.$$listenerCount[eventType]).toEqual(1);
-
-                $scope.$destroy();
-                expect($rootScope.$$listenerCount[eventType]).toBeUndefined();
-            });
-        });
     });
 
 });

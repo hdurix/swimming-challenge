@@ -8,9 +8,5 @@ angular.module('swimmingchallengeApp')
                 $scope.timeslot = result;
             });
         };
-        var unsubscribe = $rootScope.$on('swimmingchallengeApp:timeslotUpdate', function(event, result) {
-            $scope.timeslot = result;
-        });
-        $scope.$on('$destroy', unsubscribe);
 
     });

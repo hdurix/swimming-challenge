@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.DenyAll;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -49,8 +50,9 @@ public class TimeslotResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("timeslot", "idinexists", "A timeslot needs to have an ID")).body(null);
         }
         Timeslot result = timeslotService.save(timeslot);
+        String user = result.getUser().getDisplayName();
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("timeslot", timeslot.getId().toString()))
+            .headers(HeaderUtil.createAlert("Le créneau a été réservé pour " + user, user))
             .body(result);
     }
 
@@ -61,7 +63,7 @@ public class TimeslotResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @RolesAllowed(AuthoritiesConstants.USER)
+    @PermitAll
     public List<Timeslot> getAllTimeslots() {
         log.debug("REST request to get all Timeslots");
         return timeslotService.findAll();

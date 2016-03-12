@@ -2,6 +2,7 @@ package fr.hippo.swimmingchallenge.web.rest.errors;
 
 import java.util.List;
 
+import org.hibernate.StaleObjectStateException;
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -22,6 +23,13 @@ public class ExceptionTranslator {
     @ResponseBody
     public ErrorDTO processConcurencyError(ConcurrencyFailureException ex) {
         return new ErrorDTO(ErrorConstants.ERR_CONCURRENCY_FAILURE);
+    }
+
+    @ExceptionHandler(StaleObjectStateException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseBody
+    public ErrorDTO processStaleObjectStateException(StaleObjectStateException ex) {
+        return new ErrorDTO(ErrorConstants.ERR_VERSION_FAILURE);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

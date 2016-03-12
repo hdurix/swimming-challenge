@@ -4,41 +4,63 @@
     angular.module('swimmingchallengeApp')
         .controller('ChallengeController', TimeslotController);
 
-    function TimeslotController(Timeslot, User) {
+    function TimeslotController(Timeslot, Principal, $rootScope, $state) {
 
         var vm = this;
+
+        var user;
 
         vm.clear = clear;
         vm.getClass = getClass;
         vm.getTooltip = getTooltip;
+        vm.goToLogin = goToLogin;
         vm.loadAll = loadAll;
         vm.refresh = refresh;
         vm.saveTimeslot = saveTimeslot;
         vm.timeslotsByTime = {};
-        vm.users = User.query();
 
         activate();
 
         function activate() {
             loadAll();
+            loadUser();
         }
 
         function loadAll() {
             Timeslot.query(function (timeslots) {
-                var timeslots18 = _.filter(timeslots, function(timeslot) { return timeslot.startTime.substring(0, 2) == "18"; });
-                var timeslots19 = _.filter(timeslots, function(timeslot) { return timeslot.startTime.substring(0, 2) == "19"; });
-                var byTime18 = _.groupBy(timeslots18, function(timeslot) { return timeslot.startTime + ' - ' + timeslot.endTime; });
-                var byTime19 = _.groupBy(timeslots19, function(timeslot) { return timeslot.startTime + ' - ' + timeslot.endTime; });
-                var byLine18 = _.groupBy(timeslots18, 'line');
-                var byLine19 = _.groupBy(timeslots19, 'line');
-                vm.timeslotsByTime.time18 = {byTime : byTime18, byLine: byLine18};
-                vm.timeslotsByTime.time19 = {byTime : byTime19, byLine: byLine19};
+                var hours = ["18", "19"];
+                _.each(hours, function(hour) {
+                    var hourTS = _.filter(timeslots, function(ts) { return ts.startTime.substring(0, 2) == hour; });
+                    var byTime = _.groupBy(hourTS, function(ts) { return ts.startTime + ' - ' + ts.endTime; });
+                    var byLine = _.groupBy(hourTS, 'line');
+                    vm.timeslotsByTime["time" + hour] = {byTime : byTime, byLine: byLine};
+                });
+                loadTimeslot(timeslots);
+            });
+        }
+
+        function loadTimeslot(timeslots) {
+            if ($rootScope.editingTimeslot) {
+                vm.currentTimeslot = _.findWhere(timeslots, {id: $rootScope.editingTimeslot});
+                $rootScope.editingTimeslot = undefined;
+            }
+        }
+
+        function loadUser() {
+            Principal.identity().then(function(account) {
+                user = account;
+                vm.connected = account !== null;
             });
         }
 
         function refresh() {
             loadAll();
             clear();
+        }
+
+        function goToLogin() {
+            $rootScope.editingTimeslot = vm.currentTimeslot.id;
+            $state.go("login");
         }
 
         function getClass(timeslot) {
@@ -58,23 +80,22 @@
             if (timeslot.reserved) {
                 return "Equipe " + timeslot.teamName + " (réservé)";
             }
-            return "Libre";
+            return "Créneau libre";
         }
 
-
         function onSaveSuccess(result) {
-            $scope.$emit('swimmingchallengeApp:timeslotUpdate', result);
-            $uibModalInstance.close(result);
-            $scope.isSaving = false;
+            vm.currentTimeslot = result;
+            vm.isSaving = false;
         }
 
         function onSaveError(result) {
-            $scope.isSaving = false;
+            vm.isSaving = false;
         }
 
         function saveTimeslot() {
             vm.isSaving = true;
             vm.currentTimeslot.reserved = true;
+            vm.currentTimeslot.user = {id: user.id, version: user.version};
             Timeslot.update(vm.currentTimeslot, onSaveSuccess, onSaveError);
         }
 

@@ -13,7 +13,6 @@ angular.module('swimmingchallengeApp').controller('TimeslotDialogController',
         };
 
         var onSaveSuccess = function (result) {
-            $scope.$emit('swimmingchallengeApp:timeslotUpdate', result);
             $uibModalInstance.close(result);
             $scope.isSaving = false;
         };

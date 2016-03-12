@@ -16,6 +16,8 @@ public class UserDTO {
     public static final int PASSWORD_MIN_LENGTH = 5;
     public static final int PASSWORD_MAX_LENGTH = 100;
 
+    private Long id;
+
     @Pattern(regexp = "^[a-z0-9]*$")
     @NotNull
     @Size(min = 1, max = 50)
@@ -46,15 +48,16 @@ public class UserDTO {
     }
 
     public UserDTO(User user) {
-        this(user.getLogin(), null, user.getFirstName(), user.getLastName(),
+        this(user.getId(), user.getLogin(), null, user.getFirstName(), user.getLastName(),
             user.getEmail(), user.getActivated(), user.getLangKey(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()));
     }
 
-    public UserDTO(String login, String password, String firstName, String lastName,
+    public UserDTO(Long id, String login, String password, String firstName, String lastName,
         String email, boolean activated, String langKey, Set<String> authorities) {
 
+        this.id = id;
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -63,6 +66,10 @@ public class UserDTO {
         this.activated = activated;
         this.langKey = langKey;
         this.authorities = authorities;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getPassword() {
@@ -100,7 +107,8 @@ public class UserDTO {
     @Override
     public String toString() {
         return "UserDTO{" +
-            "login='" + login + '\'' +
+            "id='" + id + '\'' +
+            ", login='" + login + '\'' +
             ", password='" + password + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +

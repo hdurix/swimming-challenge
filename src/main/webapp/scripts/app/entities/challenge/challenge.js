@@ -7,7 +7,7 @@ angular.module('swimmingchallengeApp')
                 parent: 'entity',
                 url: '/challenge',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: [],
                     pageTitle: 'Challenge'
                 },
                 views: {
