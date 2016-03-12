@@ -24,7 +24,7 @@
         <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
         <div ui-view="navbar" ng-cloak=""></div>
         <div class="container">
-            <div class="well" ui-view="content"></div>
+            <div ui-view="content"></div>
 
             <div class="footer">
                 <p translate="footer">This is your footer</p>
@@ -58,6 +58,7 @@
         <script src="bower_components/json3/lib/json3.js"></script>
         <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
         <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+        <script src="bower_components/underscore/underscore.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -143,10 +144,11 @@
     <script src="scripts/components/auth/provider/auth.session.service.js"></script>
     <script src="scripts/app/account/sessions/sessions.js"></script>
     <script src="scripts/app/account/sessions/sessions.controller.js"></script>
+    <script src="scripts/app/entities/challenge/challenge.js"></script>
+    <script src="scripts/app/entities/challenge/challenge.controller.js"></script>
     <script src="scripts/app/entities/timeslot/timeslot.js"></script>
     <script src="scripts/app/entities/timeslot/timeslot.controller.js"></script>
     <script src="scripts/app/entities/timeslot/timeslot-dialog.controller.js"></script>
-    <script src="scripts/app/entities/timeslot/timeslot-delete-dialog.controller.js"></script>
     <script src="scripts/app/entities/timeslot/timeslot-detail.controller.js"></script>
     <script src="scripts/components/entities/timeslot/timeslot.service.js"></script>
     <!-- endbuild -->

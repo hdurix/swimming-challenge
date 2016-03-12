@@ -56,6 +56,7 @@ public class Timeslot implements Serializable {
 
     @NotNull
     @Column(name = "version", nullable = false)
+    @Version
     private Long version;
 
     @ManyToOne

@@ -2,6 +2,7 @@ package fr.hippo.swimmingchallenge.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import fr.hippo.swimmingchallenge.domain.Timeslot;
+import fr.hippo.swimmingchallenge.security.AuthoritiesConstants;
 import fr.hippo.swimmingchallenge.service.TimeslotService;
 import fr.hippo.swimmingchallenge.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -12,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
@@ -24,6 +27,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
+@DenyAll
 public class TimeslotResource {
 
     private final Logger log = LoggerFactory.getLogger(TimeslotResource.class);
@@ -38,6 +42,7 @@ public class TimeslotResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @RolesAllowed(AuthoritiesConstants.USER)
     public ResponseEntity<Timeslot> updateTimeslot(@Valid @RequestBody Timeslot timeslot) throws URISyntaxException {
         log.debug("REST request to update Timeslot : {}", timeslot);
         if (timeslot.getId() == null) {
@@ -56,10 +61,11 @@ public class TimeslotResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @RolesAllowed(AuthoritiesConstants.USER)
     public List<Timeslot> getAllTimeslots() {
         log.debug("REST request to get all Timeslots");
         return timeslotService.findAll();
-            }
+    }
 
     /**
      * GET  /timeslots/:id -> get the "id" timeslot.
@@ -68,6 +74,7 @@ public class TimeslotResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @RolesAllowed(AuthoritiesConstants.USER)
     public ResponseEntity<Timeslot> getTimeslot(@PathVariable Long id) {
         log.debug("REST request to get Timeslot : {}", id);
         Timeslot timeslot = timeslotService.findOne(id);

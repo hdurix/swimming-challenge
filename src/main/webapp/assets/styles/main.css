@@ -266,6 +266,10 @@ Social Buttons
    justify-content: flex-end;
 }
 
+.container {
+    width: 95%;
+}
+
 /* Align text in td verifically (top aligned by Bootstrap) */
 .jh-table > tbody > tr > td {
     vertical-align: middle;
@@ -275,3 +279,22 @@ Social Buttons
 /* jhipster-needle-scss-add-main JHipster will add new css style */
 
 /* jhipster-needle-css-add-main JHipster will add new css style */
+
+.challenge-table .challenge-td {
+    border: thin #e8e8e8 solid;
+    cursor: pointer;
+}
+
+.challenge-table .challenge-td.free {
+    background-color: #5bc0de;
+}
+.challenge-table .challenge-td.reserved {
+    background-color: #FFE770;
+}
+.challenge-table .challenge-td.payed {
+    background-color: #96FF8F;
+}
+
+.form-horizontal.form-challenge .form-group {
+    margin-bottom: 5px;
+}
