@@ -169,6 +169,7 @@ public class UserService {
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneByLogin(login).map(u -> {
             u.getAuthorities().size();
+            u.getTimeslots().size();
             return u;
         });
     }
@@ -177,6 +178,7 @@ public class UserService {
     public User getUserWithAuthorities(Long id) {
         User user = userRepository.findOne(id);
         user.getAuthorities().size(); // eagerly load the association
+        user.getTimeslots().size();
         return user;
     }
 
@@ -184,6 +186,7 @@ public class UserService {
     public User getUserWithAuthorities() {
         User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUser().getUsername()).get();
         user.getAuthorities().size(); // eagerly load the association
+        user.getTimeslots().size();
         return user;
     }
 

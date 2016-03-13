@@ -48,7 +48,7 @@
 
         function loadUser() {
             Principal.identity().then(function(account) {
-                user = account;
+                vm.user = account;
                 vm.connected = account !== null;
             });
         }

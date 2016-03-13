@@ -320,3 +320,14 @@ html {
 .form-horizontal.form-challenge.form-challenge-static .form-group {
     margin-bottom: 0px;
 }
+
+.well.challenge-well {
+    background-color: #E5E6F7;
+}
+
+.badge.badge-reserved {
+    background-color: #FFE770;
+}
+.badge.badge-payed {
+    background-color: #96FF8F;
+}

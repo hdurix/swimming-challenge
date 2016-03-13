@@ -66,6 +66,9 @@ public class AccountResourceIntTest {
 
     private MockMvc restMvc;
 
+    private Long nbReserved = 0L;
+    private Long nbPayed = 0L;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -152,8 +155,8 @@ public class AccountResourceIntTest {
             "joe@example.com",      // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
-        );
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            nbReserved, nbPayed);
 
         restMvc.perform(
             post("/api/register")
@@ -177,8 +180,8 @@ public class AccountResourceIntTest {
             "funky@example.com",    // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
-        );
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            nbReserved, nbPayed);
 
         restUserMockMvc.perform(
             post("/api/register")
@@ -202,8 +205,8 @@ public class AccountResourceIntTest {
             "invalid",          // e-mail <-- invalid
             true,               // activated
             "en",               // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
-        );
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            nbReserved, nbPayed);
 
         restUserMockMvc.perform(
             post("/api/register")
@@ -228,12 +231,12 @@ public class AccountResourceIntTest {
             "alice@example.com",    // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
-        );
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            nbReserved, nbPayed);
 
         // Duplicate login, different e-mail
         UserDTO dup = new UserDTO(u.getId(), u.getLogin(), u.getPassword(), u.getLogin(), u.getLastName(),
-            "alicejr@example.com", true, u.getLangKey(), u.getAuthorities());
+            "alicejr@example.com", true, u.getLangKey(), u.getAuthorities(), nbReserved, nbPayed);
 
         // Good user
         restMvc.perform(
@@ -266,12 +269,12 @@ public class AccountResourceIntTest {
             "john@example.com",     // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER))
-        );
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
+            nbReserved, nbPayed);
 
         // Duplicate e-mail, different login
         UserDTO dup = new UserDTO(1L, "johnjr", u.getPassword(), u.getLogin(), u.getLastName(),
-            u.getEmail(), true, u.getLangKey(), u.getAuthorities());
+            u.getEmail(), true, u.getLangKey(), u.getAuthorities(), nbReserved, nbPayed);
 
         // Good user
         restMvc.perform(
@@ -303,8 +306,8 @@ public class AccountResourceIntTest {
             "badguy@example.com",   // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.ADMIN)) // <-- only admin should be able to do that
-        );
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.ADMIN)), // <-- only admin should be able to do that
+            nbReserved, nbPayed);
 
         restMvc.perform(
             post("/api/register")

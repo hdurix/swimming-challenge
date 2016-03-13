@@ -1,6 +1,7 @@
 package fr.hippo.swimmingchallenge.web.rest.dto;
 
 import fr.hippo.swimmingchallenge.domain.Authority;
+import fr.hippo.swimmingchallenge.domain.Timeslot;
 import fr.hippo.swimmingchallenge.domain.User;
 
 import org.hibernate.validator.constraints.Email;
@@ -44,18 +45,23 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private Long nbReserved;
+    private Long nbPayed;
+
     public UserDTO() {
     }
 
     public UserDTO(User user) {
         this(user.getId(), user.getLogin(), null, user.getFirstName(), user.getLastName(),
             user.getEmail(), user.getActivated(), user.getLangKey(),
-            user.getAuthorities().stream().map(Authority::getName)
-                .collect(Collectors.toSet()));
+            user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()),
+            user.getTimeslots().stream().filter(Timeslot::getReserved).count(),
+            user.getTimeslots().stream().filter(Timeslot::getPayed).count());
     }
 
     public UserDTO(Long id, String login, String password, String firstName, String lastName,
-        String email, boolean activated, String langKey, Set<String> authorities) {
+                   String email, boolean activated, String langKey, Set<String> authorities,
+                   Long nbReserved, Long nbPayed) {
 
         this.id = id;
         this.login = login;
@@ -66,6 +72,8 @@ public class UserDTO {
         this.activated = activated;
         this.langKey = langKey;
         this.authorities = authorities;
+        this.nbReserved = nbReserved;
+        this.nbPayed = nbPayed;
     }
 
     public Long getId() {
@@ -102,6 +110,14 @@ public class UserDTO {
 
     public Set<String> getAuthorities() {
         return authorities;
+    }
+
+    public Long getNbReserved() {
+        return nbReserved;
+    }
+
+    public Long getNbPayed() {
+        return nbPayed;
     }
 
     @Override
