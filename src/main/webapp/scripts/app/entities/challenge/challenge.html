@@ -27,9 +27,10 @@
             <tbody>
             <tr ng-repeat="(line, timeslots) in tbt.byLine">
                 <td>{{line}}</td>
-                <td ng-repeat="timeslot in timeslots" class="challenge-td {{vm.getClass(timeslot)}}"
+                <td ng-repeat="timeslot in timeslots" class="text-right challenge-td {{vm.getClass(timeslot)}}"
                     data-tooltip="{{vm.getTooltip(timeslot)}}" data-tooltip-placement="top"
                     tooltip-append-to-body="true" ng-click="vm.currentTimeslot = timeslot">
+                    <span class="glyphicon glyphicon-user" ng-if="vm.user && timeslot.user.id===vm.user.id"></span>
                 </td>
             </tr>
             </tbody>

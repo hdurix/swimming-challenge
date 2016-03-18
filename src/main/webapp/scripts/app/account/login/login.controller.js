@@ -6,7 +6,9 @@ angular.module('swimmingchallengeApp')
         $scope.errors = {};
 
         $scope.rememberMe = true;
-        $timeout(function (){angular.element('[ng-model="username"]').focus();});
+        $timeout(function () {
+            angular.element('[ng-model="username"]').focus();
+        });
         $scope.login = function (event) {
             event.preventDefault();
             Auth.login({
@@ -15,11 +17,7 @@ angular.module('swimmingchallengeApp')
                 rememberMe: $scope.rememberMe
             }).then(function () {
                 $scope.authenticationError = false;
-                if ($rootScope.previousStateName === 'register') {
-                    $state.go('home');
-                } else {
-                    $rootScope.back();
-                }
+                $state.go('challenge');
             }).catch(function () {
                 $scope.authenticationError = true;
             });

@@ -186,6 +186,19 @@ public class UserResource {
                 .map(managedUserDTO -> new ResponseEntity<>(managedUserDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    /**
+     * GET  /users/:login -> get the "login" user.
+     */
+    @RequestMapping(value = "/users",
+        method = RequestMethod.GET,
+        params = {"usersWithReserves"},
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<UserDTO>> getUsersWithReserves() {
+        log.debug("REST request to get Users with reserves");
+        return new ResponseEntity<>(userService.getUsersWithReserves(), HttpStatus.OK);
+    }
     /**
      * DELETE  USER :login -> delete the "login" User.
      */

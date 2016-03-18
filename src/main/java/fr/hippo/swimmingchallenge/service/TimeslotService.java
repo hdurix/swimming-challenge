@@ -34,6 +34,18 @@ public class TimeslotService {
     }
 
     /**
+     * Save a timeslot.
+     * @return the persisted entity
+     */
+    public void hasPay(Long userId) {
+        log.debug("Request to set as pay {}", userId);
+        List<Timeslot> timeslots = timeslotRepository.findByUserId(userId);
+        timeslots.forEach(t -> t.setPayed(true));
+
+        // envoi mail
+    }
+
+    /**
      *  get all the timeslots.
      *  @return the list of entities
      */

@@ -1,0 +1,32 @@
+<div>
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Administration des créneaux</h2>
+        </div>
+    </div>
+    <jh-alert></jh-alert>
+    <h5>Liste des créneaux réservés (non payés) :</h5>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+            <table class="table table-striped">
+                <thead>
+                    <th>Capitaine</th>
+                    <th>Prix</th>
+                    <th>Valider</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in vm.usersWithReserves">
+                       <td>{{user.displayName}}</td>
+                       <td>{{user.nbReserved}} x 9 = {{user.nbReserved * 9}} €</td>
+                       <td>
+                           <button type="button" class="btn btn-success" ng-click="vm.hasPay(user)">
+                               <span class="glyphicon glyphicon-ok"></span>
+                           </button>
+                       </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

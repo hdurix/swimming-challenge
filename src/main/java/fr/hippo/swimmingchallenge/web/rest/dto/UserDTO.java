@@ -34,6 +34,8 @@ public class UserDTO {
     @Size(max = 50)
     private String lastName;
 
+    private String displayName;
+
     @Email
     @Size(min = 5, max = 100)
     private String email;
@@ -53,27 +55,25 @@ public class UserDTO {
 
     public UserDTO(User user) {
         this(user.getId(), user.getLogin(), null, user.getFirstName(), user.getLastName(),
-            user.getEmail(), user.getActivated(), user.getLangKey(),
-            user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()),
-            user.getTimeslots().stream().filter(Timeslot::getReserved).count(),
-            user.getTimeslots().stream().filter(Timeslot::getPayed).count());
+            user.getDisplayName(), user.getEmail(), user.getActivated(), user.getLangKey(),
+            user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
+        nbPayed = user.getTimeslots().stream().filter(Timeslot::getPayed).count();
+        nbReserved = user.getTimeslots().stream().filter(Timeslot::getReserved).count() - nbPayed;
     }
 
     public UserDTO(Long id, String login, String password, String firstName, String lastName,
-                   String email, boolean activated, String langKey, Set<String> authorities,
-                   Long nbReserved, Long nbPayed) {
+                   String displayName, String email, boolean activated, String langKey, Set<String> authorities) {
 
         this.id = id;
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.displayName = displayName;
         this.email = email;
         this.activated = activated;
         this.langKey = langKey;
         this.authorities = authorities;
-        this.nbReserved = nbReserved;
-        this.nbPayed = nbPayed;
     }
 
     public Long getId() {
@@ -94,6 +94,10 @@ public class UserDTO {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     public String getEmail() {

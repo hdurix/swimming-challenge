@@ -2,6 +2,7 @@ package fr.hippo.swimmingchallenge.service;
 
 import fr.hippo.swimmingchallenge.domain.Authority;
 import fr.hippo.swimmingchallenge.domain.PersistentToken;
+import fr.hippo.swimmingchallenge.domain.Timeslot;
 import fr.hippo.swimmingchallenge.domain.User;
 import fr.hippo.swimmingchallenge.repository.AuthorityRepository;
 import fr.hippo.swimmingchallenge.repository.PersistentTokenRepository;
@@ -9,8 +10,12 @@ import fr.hippo.swimmingchallenge.repository.UserRepository;
 import fr.hippo.swimmingchallenge.security.SecurityUtils;
 import fr.hippo.swimmingchallenge.service.util.RandomUtil;
 import fr.hippo.swimmingchallenge.web.rest.dto.ManagedUserDTO;
+
+import java.sql.Time;
 import java.time.ZonedDateTime;
 import java.time.LocalDate;
+
+import fr.hippo.swimmingchallenge.web.rest.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -21,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.ZonedDateTime;
 import javax.inject.Inject;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Service class for managing users.
@@ -42,6 +48,9 @@ public class UserService {
 
     @Inject
     private AuthorityRepository authorityRepository;
+
+    @Inject
+    private TimeslotService timeslotService;
 
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
@@ -188,6 +197,18 @@ public class UserService {
         user.getAuthorities().size(); // eagerly load the association
         user.getTimeslots().size();
         return user;
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserDTO> getUsersWithReserves() {
+        List<Timeslot> timeslots = timeslotService.findAll();
+        List<UserDTO> users = new ArrayList<>();
+        timeslots.stream()
+            .filter(t -> !t.getPayed())
+            .filter(t -> t.getReserved())
+            .collect(Collectors.groupingBy(Timeslot::getUser))
+            .forEach((user, ts) -> users.add(new UserDTO(user)));
+        return users;
     }
 
     /**

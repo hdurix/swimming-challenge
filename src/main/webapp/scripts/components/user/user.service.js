@@ -4,6 +4,7 @@ angular.module('swimmingchallengeApp')
     .factory('User', function ($resource) {
         return $resource('api/users/:login', {}, {
                 'query': {method: 'GET', isArray: true},
+                'usersWithReserves': {method: 'GET', isArray: true, params: {usersWithReserves: true}},
                 'get': {
                     method: 'GET',
                     transformResponse: function (data) {

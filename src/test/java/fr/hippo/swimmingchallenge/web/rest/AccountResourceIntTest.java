@@ -66,8 +66,7 @@ public class AccountResourceIntTest {
 
     private MockMvc restMvc;
 
-    private Long nbReserved = 0L;
-    private Long nbPayed = 0L;
+    private String displayName = "";
 
     @Before
     public void setup() {
@@ -152,11 +151,10 @@ public class AccountResourceIntTest {
             "password",             // password
             "Joe",                  // firstName
             "Shmoe",                // lastName
-            "joe@example.com",      // e-mail
+            displayName, "joe@example.com",      // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
-            nbReserved, nbPayed);
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)));
 
         restMvc.perform(
             post("/api/register")
@@ -177,11 +175,10 @@ public class AccountResourceIntTest {
             "password",             // password
             "Funky",                // firstName
             "One",                  // lastName
-            "funky@example.com",    // e-mail
+            displayName, "funky@example.com",    // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
-            nbReserved, nbPayed);
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)));
 
         restUserMockMvc.perform(
             post("/api/register")
@@ -202,11 +199,10 @@ public class AccountResourceIntTest {
             "password",         // password
             "Bob",              // firstName
             "Green",            // lastName
-            "invalid",          // e-mail <-- invalid
+            displayName, "invalid",          // e-mail <-- invalid
             true,               // activated
             "en",               // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
-            nbReserved, nbPayed);
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)));
 
         restUserMockMvc.perform(
             post("/api/register")
@@ -228,15 +224,14 @@ public class AccountResourceIntTest {
             "password",             // password
             "Alice",                // firstName
             "Something",            // lastName
-            "alice@example.com",    // e-mail
+            displayName, "alice@example.com",    // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
-            nbReserved, nbPayed);
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)));
 
         // Duplicate login, different e-mail
         UserDTO dup = new UserDTO(u.getId(), u.getLogin(), u.getPassword(), u.getLogin(), u.getLastName(),
-            "alicejr@example.com", true, u.getLangKey(), u.getAuthorities(), nbReserved, nbPayed);
+            displayName, "alicejr@example.com", true, u.getLangKey(), u.getAuthorities());
 
         // Good user
         restMvc.perform(
@@ -266,15 +261,14 @@ public class AccountResourceIntTest {
             "password",             // password
             "John",                 // firstName
             "Doe",                  // lastName
-            "john@example.com",     // e-mail
+            displayName, "john@example.com",     // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)),
-            nbReserved, nbPayed);
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.USER)));
 
         // Duplicate e-mail, different login
         UserDTO dup = new UserDTO(1L, "johnjr", u.getPassword(), u.getLogin(), u.getLastName(),
-            u.getEmail(), true, u.getLangKey(), u.getAuthorities(), nbReserved, nbPayed);
+            displayName, u.getEmail(), true, u.getLangKey(), u.getAuthorities());
 
         // Good user
         restMvc.perform(
@@ -303,11 +297,10 @@ public class AccountResourceIntTest {
             "password",             // password
             "Bad",                  // firstName
             "Guy",                  // lastName
-            "badguy@example.com",   // e-mail
+            displayName, "badguy@example.com",   // e-mail
             true,                   // activated
             "en",                   // langKey
-            new HashSet<>(Arrays.asList(AuthoritiesConstants.ADMIN)), // <-- only admin should be able to do that
-            nbReserved, nbPayed);
+            new HashSet<>(Arrays.asList(AuthoritiesConstants.ADMIN))); // <-- only admin should be able to do that
 
         restMvc.perform(
             post("/api/register")

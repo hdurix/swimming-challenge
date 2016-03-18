@@ -86,4 +86,19 @@ public class TimeslotResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    /**
+     * GET  /timeslots/:id -> get the "id" timeslot.
+     */
+    @RequestMapping(value = "/timeslots",
+        method = RequestMethod.GET,
+        params = {"hasPay"},
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @RolesAllowed(AuthoritiesConstants.USER)
+    public ResponseEntity<Void> hasPay(@RequestParam Long userId) {
+        log.debug("Request to set as pay {}", userId);
+        timeslotService.hasPay(userId);
+        return ResponseEntity.ok().build();
+    }
 }

@@ -86,6 +86,7 @@
         function onSaveSuccess(result) {
             vm.currentTimeslot = result;
             vm.isSaving = false;
+            vm.user.nbReserved++;
         }
 
         function onSaveError(result) {
@@ -95,7 +96,7 @@
         function saveTimeslot() {
             vm.isSaving = true;
             vm.currentTimeslot.reserved = true;
-            vm.currentTimeslot.user = {id: user.id, version: user.version};
+            vm.currentTimeslot.user = {id: vm.user.id, version: vm.user.version};
             Timeslot.update(vm.currentTimeslot, onSaveSuccess, onSaveError);
         }
 

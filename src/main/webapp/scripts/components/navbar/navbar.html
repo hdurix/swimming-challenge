@@ -14,7 +14,13 @@
                 <li ui-sref-active="active">
                     <a ui-sref="challenge" data-toggle="collapse" data-target=".navbar-collapse.in">
                         <span class="glyphicon glyphicon-home"></span>
-                        &#xA0;<span >Défi Natation</span>
+                        &#xA0;<span>Défi Natation</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active" ng-switch-when="true" has-authority="ROLE_ADMIN">
+                    <a ui-sref="administration" data-toggle="collapse" data-target=".navbar-collapse.in">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        &#xA0;<span>Administration des inscrits</span>
                     </a>
                 </li>
                 <li ng-class="{active: $state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" class="dropdown pointer">

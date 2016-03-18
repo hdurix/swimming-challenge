@@ -14,4 +14,6 @@ public interface TimeslotRepository extends JpaRepository<Timeslot,Long> {
     @Query("select timeslot from Timeslot timeslot where timeslot.user.login = ?#{principal.username}")
     List<Timeslot> findByUserIsCurrentUser();
 
+    List<Timeslot> findByUserId(Long id);
+
 }
