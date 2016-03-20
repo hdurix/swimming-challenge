@@ -4,20 +4,30 @@
     angular.module('swimmingchallengeApp')
         .controller('ChallengeController', TimeslotController);
 
-    function TimeslotController(Timeslot, Principal, $rootScope, $state) {
+    function TimeslotController(Timeslot, Principal, User, $rootScope, $state) {
 
         var vm = this;
 
-        var user;
+        var userCreationTypes = {
+            CURRENT: {id: "CURRENT", label: "Utilisateur connecté"},
+            EXISTING: {id: "EXISTING", label: "Utilisateur enregistré"},
+            NEW: {id: "NEW", label: "Nouvel utilisateur"}
+        };
 
         vm.clear = clear;
         vm.getClass = getClass;
         vm.getTooltip = getTooltip;
         vm.goToLogin = goToLogin;
+        vm.isAuthenticated = Principal.isAuthenticated;
         vm.loadAll = loadAll;
         vm.refresh = refresh;
         vm.saveTimeslot = saveTimeslot;
         vm.timeslotsByTime = {};
+        vm.userCreationType = userCreationTypes.CURRENT;
+        vm.userCreationTypes = userCreationTypes;
+        if (vm.isAuthenticated()) {
+            vm.users = User.query();
+        }
 
         activate();
 
@@ -86,7 +96,9 @@
         function onSaveSuccess(result) {
             vm.currentTimeslot = result;
             vm.isSaving = false;
-            vm.user.nbReserved++;
+            if (vm.userCreationType === userCreationTypes.CURRENT) {
+                vm.user.nbReserved++;
+            }
         }
 
         function onSaveError(result) {
@@ -96,7 +108,14 @@
         function saveTimeslot() {
             vm.isSaving = true;
             vm.currentTimeslot.reserved = true;
-            vm.currentTimeslot.user = {id: vm.user.id, version: vm.user.version};
+            if (vm.userCreationType !== userCreationTypes.NEW) {
+                if (vm.userCreationType === userCreationTypes.CURRENT) {
+                    vm.currentTimeslot.user = vm.user;
+                }
+                vm.currentTimeslot.user = {id: vm.currentTimeslot.user.id};
+            } else {
+                vm.currentTimeslot.user.external = true;
+            }
             Timeslot.update(vm.currentTimeslot, onSaveSuccess, onSaveError);
         }
 

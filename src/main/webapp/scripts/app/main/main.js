@@ -5,7 +5,7 @@ angular.module('swimmingchallengeApp')
         $stateProvider
             .state('home', {
                 parent: 'site',
-                url: '/',
+                url: '/home',
                 data: {
                     authorities: []
                 },
@@ -16,7 +16,7 @@ angular.module('swimmingchallengeApp')
                     }
                 },
                 resolve: {
-                    
+
                 }
             });
     });

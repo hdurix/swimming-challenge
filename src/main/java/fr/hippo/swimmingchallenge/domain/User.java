@@ -4,13 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import java.time.ZonedDateTime;
 
 /**
  * A user.
@@ -23,13 +21,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     @Size(min = 1, max = 100)
     @Column(length = 100, unique = true, nullable = false)
     private String login;
 
     @JsonIgnore
-    @NotNull
     @Size(min = 60, max = 60)
     @Column(name = "password_hash",length = 60)
     private String password;
@@ -49,6 +45,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(nullable = false)
     private boolean activated = false;
+
+    @Column(nullable = false)
+    private boolean external = false;
 
     @Size(min = 2, max = 5)
     @Column(name = "lang_key", length = 5)
@@ -138,6 +137,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.activated = activated;
     }
 
+    public boolean isExternal() {
+        return external;
+    }
+
+    public void setExternal(boolean external) {
+        this.external = external;
+    }
+
     public String getActivationKey() {
         return activationKey;
     }
@@ -218,7 +225,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return login.hashCode();
+        if (login != null) {
+            return login.hashCode();
+        } else {
+            return getDisplayName().hashCode();
+        }
     }
 
     @Override
@@ -229,6 +240,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
             ", activated='" + activated + '\'' +
+            ", external='" + external + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
             "}";

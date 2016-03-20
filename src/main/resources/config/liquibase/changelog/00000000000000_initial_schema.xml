@@ -23,9 +23,7 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="login" type="varchar(100)">
-                <constraints unique="true" nullable="false"/>
-            </column>
+            <column name="login" type="varchar(100)"/>
             <column name="password_hash" type="varchar(60)"/>
             <column name="first_name" type="varchar(50)"/>
             <column name="last_name" type="varchar(50)"/>
@@ -33,6 +31,9 @@
                 <constraints unique="true"/>
             </column>
             <column name="activated" type="boolean" valueBoolean="false">
+                <constraints nullable="false" />
+            </column>
+            <column name="external" type="boolean" valueBoolean="false">
                 <constraints nullable="false" />
             </column>
             <column name="lang_key" type="varchar(5)"/>
@@ -50,7 +51,7 @@
             <column name="last_modified_by" type="varchar(50)"/>
             <column name="last_modified_date" type="timestamp"/>
         </createTable>
-        
+
         <createIndex indexName="idx_user_login"
             tableName="jhi_user"
             unique="true">
@@ -62,7 +63,7 @@
             unique="true">
             <column name="email" type="varchar(100)"/>
         </createIndex>
-        
+
         <createTable tableName="jhi_authority">
             <column name="name" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -170,7 +171,7 @@
                                  constraintName="fk_evt_pers_audit_evt_data"
                                  referencedColumnNames="event_id"
                                  referencedTableName="jhi_persistent_audit_event"/>
-    
+
     <!-- Social -->
     <createTable tableName="jhi_social_user_connection">
         <column name="id" type="bigint" autoIncrement="${autoIncrement}">
@@ -202,7 +203,7 @@
     <addUniqueConstraint tableName="jhi_social_user_connection" columnNames="user_id, provider_id, provider_user_id"/>
 
     <addUniqueConstraint tableName="jhi_social_user_connection" columnNames="user_id, provider_id, rank"/>
-    
+
     </changeSet>
-    
+
 </databaseChangeLog>

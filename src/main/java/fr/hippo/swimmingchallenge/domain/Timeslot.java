@@ -59,7 +59,7 @@ public class Timeslot implements Serializable {
     @Version
     private Long version;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     private User user;
 

@@ -97,6 +97,31 @@
                     </div>
                     <div ng-switch-when="true">
                         <jh-alert-error></jh-alert-error>
+                        <div class="form-group" has-authority="ROLE_ADMIN" ng-if="vm.isAuthenticated()">
+                            <label class="col-sm-4 control-label">Capitaine</label>
+                            <div class="col-sm-3">
+                                <select class="form-control" ng-model="vm.userCreationType"
+                                        ng-options="userType as userType.label for userType in vm.userCreationTypes">
+                                </select>
+                            </div>
+                            <div class="col-sm-5">
+                                <p class="form-control-static" ng-if="vm.userCreationType === vm.userCreationTypes.CURRENT">
+                                    {{vm.user.displayName}}
+                                </p>
+                                <div ng-if="vm.userCreationType === vm.userCreationTypes.NEW">
+                                    <input type="text" class="form-control input-sm" placeholder="Nom de famille"
+                                           ng-model="vm.currentTimeslot.user.lastName"/>
+                                    <input type="text" class="form-control input-sm" placeholder="Prénom"
+                                           ng-model="vm.currentTimeslot.user.firstName"/>
+                                    <input type="text" class="form-control input-sm" placeholder="E-mail"
+                                           ng-model="vm.currentTimeslot.user.email"/>
+                                </div>
+                                <select class="form-control" ng-model="vm.currentTimeslot.user"
+                                        ng-options="user as user.displayName for user in vm.users"
+                                        ng-if="vm.userCreationType === vm.userCreationTypes.EXISTING">
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="field_teamName">Nom d'équipe</label>
                             <div class="col-sm-8">

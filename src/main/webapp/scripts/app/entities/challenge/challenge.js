@@ -5,7 +5,7 @@ angular.module('swimmingchallengeApp')
         $stateProvider
             .state('challenge', {
                 parent: 'entity',
-                url: '/challenge',
+                url: '/',
                 data: {
                     authorities: [],
                     pageTitle: 'Challenge'

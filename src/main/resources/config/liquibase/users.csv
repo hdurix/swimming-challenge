@@ -1,2 +1,2 @@
-id;login;password_hash;first_name;last_name;email;activated;lang_key;created_by
-1;admin;$2a$10$xwhz3mUTY.hVDFQQO04Ep.xDY0GrP2QPmvB2P3cSw1edgNGrIQ7NS;Administrator;Administrator;admin@localhost;true;en;system
+id;login;password_hash;first_name;last_name;email;activated;external;lang_key;created_by
+1;admin;$2a$10$xwhz3mUTY.hVDFQQO04Ep.xDY0GrP2QPmvB2P3cSw1edgNGrIQ7NS;Administrator;Administrator;admin@localhost;true;false;en;system

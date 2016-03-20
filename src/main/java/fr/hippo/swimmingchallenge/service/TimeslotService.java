@@ -2,6 +2,7 @@ package fr.hippo.swimmingchallenge.service;
 
 import fr.hippo.swimmingchallenge.domain.Timeslot;
 import fr.hippo.swimmingchallenge.repository.TimeslotRepository;
+import fr.hippo.swimmingchallenge.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,9 @@ public class TimeslotService {
     private final Logger log = LoggerFactory.getLogger(TimeslotService.class);
 
     @Inject
+    private UserRepository userRepository;
+
+    @Inject
     private TimeslotRepository timeslotRepository;
 
     /**
@@ -29,6 +33,9 @@ public class TimeslotService {
      */
     public Timeslot save(Timeslot timeslot) {
         log.debug("Request to save Timeslot : {}", timeslot);
+        if (timeslot.getUser().getId() != null) {
+            timeslot.setUser(userRepository.findOne(timeslot.getUser().getId()));
+        }
         Timeslot result = timeslotRepository.save(timeslot);
         return result;
     }
