@@ -4,23 +4,24 @@
             <h1>Reset password</h1>
 
             <div class="alert alert-danger" ng-show="keyMissing">
-                <strong>The password reset key is missing.</strong>
+                <strong>La clé pour la réinitialisation du mot de passe est manquante.</strong>
             </div>
 
             <div class="alert alert-warning" ng-hide="success || keyMissing">
-                <p>Choose a new password</p>
+                <p>Choisissez un nouveau mot de passe</p>
             </div>
 
             <div class="alert alert-danger" ng-show="error">
-                <p>Your password couldn't be reset. Remember a password request is only valid for 24 hours.</p>
+                <p>Votre mot de passe n'a pas pu être modifié. La demande de modification de mot de passe n'est valable que 24 heures.</p>
             </div>
 
             <div class="alert alert-success" ng-show="success">
-                <p><strong>Your password has been reset.</strong> Please <a class="alert-link" href="#/login">sign in</a>.</p>
+                <p><strong>Votre mot de passe a été réinitialisé.</strong> Vous pouvez maintenant vous
+                    <a class="alert-link" href="#/login">connecter</a>.</p>
             </div>
 
             <div class="alert alert-danger" ng-show="doNotMatch">
-                The password and its confirmation do not match!
+                Le mot de passe et la confirmation ne correspondent pas !
             </div>
 
             <div ng-hide="keyMissing">
@@ -32,40 +33,41 @@
                         <div ng-show="form.password.$dirty && form.password.$invalid">
                             <p class="help-block"
                                ng-show="form.password.$error.required">
-                                Your password is required.
+                                Votre mot de passe est obligatoire.
                             </p>
                             <p class="help-block"
                                ng-show="form.password.$error.minlength">
-                                Your password is required to be at least 5 characters.
+                                Votre mot de passe doit faire plus de 5 caractères.
                             </p>
                             <p class="help-block"
                                ng-show="form.password.$error.maxlength">
-                                Your password cannot be longer than 50 characters.
+                                Votre mot de passe doit faire moins de 50 caractères.
                             </p>
                         </div>
                         <password-strength-bar password-to-check="resetAccount.password"></password-strength-bar>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="confirmPassword">New password confirmation</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm the new password"
+                        <label class="control-label" for="confirmPassword">Confirmation du nouveau mot de passe</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                               placeholder="Confirmation du nouveau mot de passe"
                                ng-model="confirmPassword" ng-minlength=5 ng-maxlength=50 required>
                         <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
                             <p class="help-block"
                                ng-show="form.confirmPassword.$error.required">
-                                Your password confirmation is required.
+                                Votre confirmation de mot de passe est obligatoire.
                             </p>
                             <p class="help-block"
                                ng-show="form.confirmPassword.$error.minlength">
-                                Your password confirmation is required to be at least 5 characters.
+                                Votre mot de passe doit faire au moins 5 caractères.
                             </p>
                             <p class="help-block"
                                ng-show="form.confirmPassword.$error.maxlength">
-                                Your password confirmation cannot be longer than 50 characters.
+                                Votre mot de passe doit faire moins de 50 caractères.
                             </p>
                         </div>
                     </div>
-                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Reset Password</button>
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Réinitialiser</button>
                 </form>
             </div>
 
