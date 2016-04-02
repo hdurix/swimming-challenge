@@ -11,7 +11,7 @@
 
     <groupId>fr.hippo.swimmingchallenge</groupId>
     <artifactId>swimmingchallenge</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <packaging>war</packaging>
     <name>swimmingChallenge</name>
 
@@ -372,6 +372,7 @@
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>
     <build>
+        <finalName>swimmingchallenge</finalName>
         <defaultGoal>spring-boot:run</defaultGoal>
         <resources>
             <resource>

@@ -8,6 +8,6 @@ angular.module('swimmingchallengeApp')
 
         $scope.logout = function () {
             Auth.logout();
-            $state.go('home');
+            $state.go('challenge');
         };
     });
