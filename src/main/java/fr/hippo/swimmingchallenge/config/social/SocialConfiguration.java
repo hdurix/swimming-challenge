@@ -4,6 +4,7 @@ import fr.hippo.swimmingchallenge.repository.SocialUserConnectionRepository;
 import fr.hippo.swimmingchallenge.repository.CustomSocialUsersConnectionRepository;
 import fr.hippo.swimmingchallenge.security.social.CustomSignInAdapter;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -106,9 +107,14 @@ public class SocialConfiguration implements SocialConfigurer {
     }
 
     @Bean
-    public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository, SignInAdapter signInAdapter) throws Exception {
+    public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository, SignInAdapter signInAdapter, Environment environment) throws Exception {
         ProviderSignInController providerSignInController = new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, signInAdapter);
         providerSignInController.setSignUpUrl("/social/signup");
+        String applicationUrl = environment.getProperty("application.url");
+        if (!StringUtils.isBlank(applicationUrl)) {
+            log.debug("application url is set to {}", applicationUrl);
+            providerSignInController.setApplicationUrl(applicationUrl);
+        }
         return providerSignInController;
     }
 
