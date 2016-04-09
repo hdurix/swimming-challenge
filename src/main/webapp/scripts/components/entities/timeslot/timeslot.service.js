@@ -12,6 +12,10 @@ angular.module('swimmingchallengeApp')
                     return data;
                 }
             },
+            'erase': {
+                method: 'PUT',
+                params: {erase: true}
+            },
             'update': { method:'PUT' }
         });
     });

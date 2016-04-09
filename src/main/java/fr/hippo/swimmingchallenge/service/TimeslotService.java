@@ -73,4 +73,19 @@ public class TimeslotService {
         Timeslot timeslot = timeslotRepository.findOne(id);
         return timeslot;
     }
+
+    /**
+     *  erase one timeslot by id.
+     *  @return the entity
+     */
+    @Transactional
+    public Timeslot eraseTimeslot(Long id) {
+        log.debug("Request to erase Timeslot : {}", id);
+        Timeslot timeslot = timeslotRepository.findOne(id);
+        if (timeslot == null) {
+            return null;
+        }
+        timeslot.erase();
+        return timeslot;
+    }
 }

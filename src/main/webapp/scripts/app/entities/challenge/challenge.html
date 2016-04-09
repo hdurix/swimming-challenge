@@ -18,7 +18,13 @@
         <div ng-if="vm.currentTimeslot.reserved">
 
             <form class="form-horizontal form-challenge form-challenge-static" ng-if="vm.currentTimeslot.reserved">
-                <h4>Créneau {{vm.currentTimeslot.payed ? "payé" : "réservé"}} par {{vm.currentTimeslot.user.displayName}}</h4>
+                <h4>Créneau {{vm.currentTimeslot.payed ? "payé" : "réservé"}} par {{vm.currentTimeslot.user.displayName}}
+                    <button type="button" ng-click="vm.eraseTimeslot()" has-authority="ROLE_ADMIN"
+                            class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                        Supprimer
+                    </button>
+                </h4>
                 <div class="row">
                     <div class="col-sm-7">
                         <div class="form-group">
@@ -130,41 +136,43 @@
                                 </div>
                             </div>
                             <div class="col-sm-5">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="field_teamName">Nom d'équipe</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control input-sm" name="teamName" id="field_teamName"
-                                               ng-model="vm.currentTimeslot.teamName"/>
+                                <form class="form-horizontal form-challenge">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="field_teamName">Nom d'équipe</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control input-sm" name="teamName" id="field_teamName"
+                                                   ng-model="vm.currentTimeslot.teamName"/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="field_swimmer1">Nageur 1</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control input-sm" name="swimmer1" id="field_swimmer1"
-                                               ng-model="vm.currentTimeslot.swimmer1"/>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="field_swimmer1">Nageur 1</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control input-sm" name="swimmer1" id="field_swimmer1"
+                                                   ng-model="vm.currentTimeslot.swimmer1"/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="field_swimmer2">Nageur 2</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control input-sm" name="swimmer2" id="field_swimmer2"
-                                               ng-model="vm.currentTimeslot.swimmer2"/>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="field_swimmer2">Nageur 2</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control input-sm" name="swimmer2" id="field_swimmer2"
+                                                   ng-model="vm.currentTimeslot.swimmer2"/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="field_swimmer3">Nageur 3</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control input-sm" name="swimmer3" id="field_swimmer3"
-                                               ng-model="vm.currentTimeslot.swimmer3"/>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="field_swimmer3">Nageur 3</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control input-sm" name="swimmer3" id="field_swimmer3"
+                                                   ng-model="vm.currentTimeslot.swimmer3"/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="field_swimmer4">Nageur 4</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control input-sm" name="swimmer4" id="field_swimmer4"
-                                               ng-model="vm.currentTimeslot.swimmer4"/>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="field_swimmer4">Nageur 4</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control input-sm" name="swimmer4" id="field_swimmer4"
+                                                   ng-model="vm.currentTimeslot.swimmer4"/>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
 

@@ -90,6 +90,25 @@ public class TimeslotResource {
     /**
      * GET  /timeslots/:id -> get the "id" timeslot.
      */
+    @RequestMapping(value = "/timeslots/{id}",
+        method = RequestMethod.PUT,
+        params = "erase",
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @RolesAllowed(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<Timeslot> eraseTimeslot(@PathVariable Long id) {
+        log.debug("REST request to get Timeslot : {}", id);
+        Timeslot timeslot = timeslotService.eraseTimeslot(id);
+        return Optional.ofNullable(timeslot)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * GET  /timeslots/:id -> get the "id" timeslot.
+     */
     @RequestMapping(value = "/timeslots",
         method = RequestMethod.GET,
         params = {"hasPay"},

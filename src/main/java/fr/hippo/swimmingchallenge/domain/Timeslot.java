@@ -4,6 +4,7 @@ package fr.hippo.swimmingchallenge.domain;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -49,6 +50,9 @@ public class Timeslot implements Serializable {
 
     @Column(name = "swimmer4")
     private String swimmer4;
+
+    @Column(name = "reserved_date")
+    private LocalDate reservedDate;
 
     @NotNull
     @Column(name = "line", nullable = false, updatable = false)
@@ -143,6 +147,14 @@ public class Timeslot implements Serializable {
         this.swimmer4 = swimmer4;
     }
 
+    public LocalDate getReservedDate() {
+        return reservedDate;
+    }
+
+    public void setReservedDate(LocalDate reservedDate) {
+        this.reservedDate = reservedDate;
+    }
+
     public Integer getLine() {
         return line;
     }
@@ -203,5 +215,16 @@ public class Timeslot implements Serializable {
             ", line='" + line + "'" +
             ", version='" + version + "'" +
             '}';
+    }
+
+    public void erase() {
+        payed = false;
+        reserved = false;
+        teamName = null;
+        swimmer1 = null;
+        swimmer2 = null;
+        swimmer3 = null;
+        swimmer4 = null;
+        user = null;
     }
 }

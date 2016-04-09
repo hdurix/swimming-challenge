@@ -15,6 +15,7 @@
         };
 
         vm.clear = clear;
+        vm.eraseTimeslot = eraseTimeslot;
         vm.getClass = getClass;
         vm.getTooltip = getTooltip;
         vm.goToLogin = goToLogin;
@@ -106,11 +107,13 @@
             vm.isSaving = false;
             AlertService.error("Une erreur est survenue. Veuillez réessayer.");
             vm.currentTimeslot.reserved = false;
+            vm.currentTimeslot.reservedDate = null;
         }
 
         function saveTimeslot() {
             vm.isSaving = true;
             vm.currentTimeslot.reserved = true;
+            vm.currentTimeslot.reservedDate = new Date();
             if (vm.userCreationType !== userCreationTypes.NEW) {
                 if (vm.userCreationType === userCreationTypes.CURRENT) {
                     vm.currentTimeslot.user = vm.user;
@@ -120,6 +123,12 @@
                 vm.currentTimeslot.user.external = true;
             }
             Timeslot.update(vm.currentTimeslot, onSaveSuccess, onSaveError);
+        }
+
+        function eraseTimeslot() {
+            Timeslot.erase({id: vm.currentTimeslot.id}, {}, function(timeslot) {
+                vm.currentTimeslot = timeslot;
+            });
         }
 
         function clear() {
@@ -133,6 +142,7 @@
                 swimmer2: null,
                 swimmer3: null,
                 swimmer4: null,
+                reservedDate: null,
                 line: null,
                 version: null,
                 id: null

@@ -47,6 +47,8 @@
 
             <column name="swimmer4" type="varchar(255)"/>
 
+            <column name="reserved_date" type="timestamp"/>
+
             <column name="line" type="integer">
                 <constraints nullable="false" />
             </column>
