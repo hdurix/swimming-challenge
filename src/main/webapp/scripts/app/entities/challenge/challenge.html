@@ -13,6 +13,168 @@
     </div>
     <h5>Ci dessous se trouve le planning de la soirée de natation pour le Défi Anthony.</h5>
     <h5>Pour réserver un nouveau créneau, vous pouvez cliquer sur un créneau disponible.</h5>
+    <div ng-if="vm.currentTimeslot" class="well challenge-well well-sm row">
+
+        <div ng-if="vm.currentTimeslot.reserved">
+
+            <form class="form-horizontal form-challenge form-challenge-static" ng-if="vm.currentTimeslot.reserved">
+                <h4>Créneau {{vm.currentTimeslot.payed ? "payé" : "réservé"}} par {{vm.currentTimeslot.user.displayName}}</h4>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Créneau</label>
+                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Ligne</label>
+                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Nom d'équipe</label>
+                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.teamName}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Capitaine</label>
+                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.user.displayName}}</p></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Nageur 1</label>
+                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer1}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Nageur 2</label>
+                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer2}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Nageur 3</label>
+                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer3}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Nageur 4</label>
+                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer4}}</p></div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div ng-if="!vm.currentTimeslot.reserved">
+            <form name="editForm" role="form" class="form-horizontal form-challenge" novalidate show-validation>
+                <h4>Réservation de ce créneau :</h4>
+                <div ng-if="!vm.connected">
+                    <form class="form-horizontal form-challenge form-challenge-static">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Créneau</label>
+                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Ligne</label>
+                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
+                        </div>
+                    </form>
+                    Pour continuer la réservation de ce créneau, merci de bien vouloir vous
+                    <a class="hand" ng-click="vm.goToLogin()">connecter</a>.
+                </div>
+                <div ng-if="vm.connected">
+                    <jh-alert-error></jh-alert-error>
+                    <div class="form-group" ng-if="vm.isAuthenticated()">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <form class="form-horizontal form-challenge form-challenge-static">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Créneau</label>
+                                        <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Ligne</label>
+                                        <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
+                                    </div>
+                                    <div class="form-group" has-authority="ROLE_ADMIN">
+                                        <label class="col-sm-3 control-label">Capitaine</label>
+                                        <div class="col-sm-4">
+                                            <select class="form-control" ng-model="vm.userCreationType"
+                                                    ng-options="userType as userType.label for userType in vm.userCreationTypes">
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <p class="form-control-static" ng-if="vm.userCreationType === vm.userCreationTypes.CURRENT">
+                                                {{vm.user.displayName}}
+                                            </p>
+                                            <div ng-if="vm.userCreationType === vm.userCreationTypes.NEW">
+                                                <input type="text" class="form-control input-sm" placeholder="Nom de famille"
+                                                       ng-model="vm.currentTimeslot.user.lastName"/>
+                                                <input type="text" class="form-control input-sm" placeholder="Prénom"
+                                                       ng-model="vm.currentTimeslot.user.firstName"/>
+                                                <input type="text" class="form-control input-sm" placeholder="E-mail"
+                                                       ng-model="vm.currentTimeslot.user.email"/>
+                                            </div>
+                                            <select class="form-control" ng-model="vm.currentTimeslot.user"
+                                                    ng-options="user as user.displayName for user in vm.users"
+                                                    ng-if="vm.userCreationType === vm.userCreationTypes.EXISTING">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div class="text-center" style="margin-top:20px">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.currentTimeslot = undefined">
+                                        <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Annuler</span>
+                                    </button>
+                                    <button type="button" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary" ng-click="vm.saveTimeslot()">
+                                        <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Sauvegarder</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="field_teamName">Nom d'équipe</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control input-sm" name="teamName" id="field_teamName"
+                                               ng-model="vm.currentTimeslot.teamName"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="field_swimmer1">Nageur 1</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control input-sm" name="swimmer1" id="field_swimmer1"
+                                               ng-model="vm.currentTimeslot.swimmer1"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="field_swimmer2">Nageur 2</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control input-sm" name="swimmer2" id="field_swimmer2"
+                                               ng-model="vm.currentTimeslot.swimmer2"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="field_swimmer3">Nageur 3</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control input-sm" name="swimmer3" id="field_swimmer3"
+                                               ng-model="vm.currentTimeslot.swimmer3"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="field_swimmer4">Nageur 4</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control input-sm" name="swimmer4" id="field_swimmer4"
+                                               ng-model="vm.currentTimeslot.swimmer4"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
     <jh-alert></jh-alert>
     <div ng-repeat="tbt in vm.timeslotsByTime">
         <table class="jh-table table challenge-table">
@@ -36,140 +198,4 @@
             </tbody>
         </table>
     </div>
-    <div ng-if="vm.currentTimeslot" class="well challenge-well well-sm row"  ng-switch="vm.currentTimeslot.reserved">
-
-        <div class="row">
-            <div class="col-sm-4 text-center">
-                <h4 ng-switch-when="true">Créneau réservé par {{vm.currentTimeslot.user.displayName}}</h4>
-                <h4 ng-switch-when="false">Réservation de ce créneau :</h4>
-            </div>
-            <div class="col-sm-8">
-                <form class="form-horizontal form-challenge form-challenge-static">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Créneau</label>
-                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Ligne</label>
-                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
-                    </div>
-                </form>
-
-                <form class="form-horizontal form-challenge form-challenge-static" ng-switch-when="true">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Nom d'équipe</label>
-                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.teamName}}</p></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Capitaine</label>
-                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.user.displayName}}</p></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Réservé</label>
-                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.reserved ? "Oui" : "Non"}}</p></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Payé</label>
-                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.payed ? "Oui" : "Non"}}</p></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Nageur 1</label>
-                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer1}}</p></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Nageur 2</label>
-                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer2}}</p></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Nageur 3</label>
-                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer3}}</p></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Nageur 4</label>
-                        <div class="col-sm-8"><p class="form-control-static">{{vm.currentTimeslot.swimmer4}}</p></div>
-                    </div>
-                </form>
-                <form name="editForm" role="form" class="form-horizontal form-challenge" novalidate ng-submit="vm.saveTimeslot()"
-                      show-validation ng-switch-when="false" ng-switch="vm.connected">
-                    <div ng-switch-when="false">
-                        Pour continuer la réservation de ce créneau, merci de bien vouloir vous
-                        <a class="hand" ng-click="vm.goToLogin()">connecter</a>.
-                    </div>
-                    <div ng-switch-when="true">
-                        <jh-alert-error></jh-alert-error>
-                        <div class="form-group" has-authority="ROLE_ADMIN" ng-if="vm.isAuthenticated()">
-                            <label class="col-sm-4 control-label">Capitaine</label>
-                            <div class="col-sm-3">
-                                <select class="form-control" ng-model="vm.userCreationType"
-                                        ng-options="userType as userType.label for userType in vm.userCreationTypes">
-                                </select>
-                            </div>
-                            <div class="col-sm-5">
-                                <p class="form-control-static" ng-if="vm.userCreationType === vm.userCreationTypes.CURRENT">
-                                    {{vm.user.displayName}}
-                                </p>
-                                <div ng-if="vm.userCreationType === vm.userCreationTypes.NEW">
-                                    <input type="text" class="form-control input-sm" placeholder="Nom de famille"
-                                           ng-model="vm.currentTimeslot.user.lastName"/>
-                                    <input type="text" class="form-control input-sm" placeholder="Prénom"
-                                           ng-model="vm.currentTimeslot.user.firstName"/>
-                                    <input type="text" class="form-control input-sm" placeholder="E-mail"
-                                           ng-model="vm.currentTimeslot.user.email"/>
-                                </div>
-                                <select class="form-control" ng-model="vm.currentTimeslot.user"
-                                        ng-options="user as user.displayName for user in vm.users"
-                                        ng-if="vm.userCreationType === vm.userCreationTypes.EXISTING">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="field_teamName">Nom d'équipe</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control input-sm" name="teamName" id="field_teamName"
-                                       ng-model="vm.currentTimeslot.teamName"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="field_swimmer1">Nageur 1</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control input-sm" name="swimmer1" id="field_swimmer1"
-                                       ng-model="vm.currentTimeslot.swimmer1"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="field_swimmer2">Nageur 2</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control input-sm" name="swimmer2" id="field_swimmer2"
-                                       ng-model="vm.currentTimeslot.swimmer2"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="field_swimmer3">Nageur 3</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control input-sm" name="swimmer3" id="field_swimmer3"
-                                       ng-model="vm.currentTimeslot.swimmer3"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="field_swimmer4">Nageur 4</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control input-sm" name="swimmer4" id="field_swimmer4"
-                                       ng-model="vm.currentTimeslot.swimmer4"/>
-                            </div>
-                        </div>
-
-                        <div class="text-right">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.currentTimeslot = undefined">
-                                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Annuler</span>
-                            </button>
-                            <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Sauvegarder</span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
 </div>

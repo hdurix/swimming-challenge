@@ -4,7 +4,7 @@
     angular.module('swimmingchallengeApp')
         .controller('ChallengeController', TimeslotController);
 
-    function TimeslotController(Timeslot, Principal, User, $rootScope, $state) {
+    function TimeslotController(Timeslot, Principal, User, AlertService, $rootScope, $state, $filter) {
 
         var vm = this;
 
@@ -38,6 +38,7 @@
 
         function loadAll() {
             Timeslot.query(function (timeslots) {
+                timeslots = $filter('orderBy')(timeslots, 'startTime');
                 var hours = ["18", "19"];
                 _.each(hours, function(hour) {
                     var hourTS = _.filter(timeslots, function(ts) { return ts.startTime.substring(0, 2) == hour; });
@@ -103,6 +104,8 @@
 
         function onSaveError(result) {
             vm.isSaving = false;
+            AlertService.error("Une erreur est survenue. Veuillez réessayer.");
+            vm.currentTimeslot.reserved = false;
         }
 
         function saveTimeslot() {
