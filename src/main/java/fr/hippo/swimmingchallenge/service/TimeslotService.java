@@ -37,7 +37,7 @@ public class TimeslotService {
             timeslot.setUser(userRepository.findOne(timeslot.getUser().getId()));
         }
         Timeslot result = timeslotRepository.save(timeslot);
-        return result;
+        return findOne(result.getId());
     }
 
     /**
@@ -70,7 +70,7 @@ public class TimeslotService {
     @Transactional(readOnly = true)
     public Timeslot findOne(Long id) {
         log.debug("Request to get Timeslot : {}", id);
-        Timeslot timeslot = timeslotRepository.findOne(id);
+        Timeslot timeslot = timeslotRepository.findOneWithUser(id);
         return timeslot;
     }
 
@@ -86,6 +86,6 @@ public class TimeslotService {
             return null;
         }
         timeslot.erase();
-        return timeslot;
+        return findOne(timeslot.getId());
     }
 }

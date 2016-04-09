@@ -16,4 +16,8 @@ public interface TimeslotRepository extends JpaRepository<Timeslot,Long> {
 
     List<Timeslot> findByUserId(Long id);
 
+    @Query("from Timeslot t " +
+        "left join fetch t.user " +
+        "where t.id = ?1")
+    Timeslot findOneWithUser(Long id);
 }

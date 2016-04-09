@@ -126,9 +126,11 @@
         }
 
         function eraseTimeslot() {
-            Timeslot.erase({id: vm.currentTimeslot.id}, {}, function(timeslot) {
-                vm.currentTimeslot = timeslot;
-            });
+            if (confirm('Etes-vous sûr de vouloir supprimer cette réservation ?')) {
+                Timeslot.erase({id: vm.currentTimeslot.id}, {}, function(timeslot) {
+                    vm.currentTimeslot = timeslot;
+                });
+            }
         }
 
         function clear() {

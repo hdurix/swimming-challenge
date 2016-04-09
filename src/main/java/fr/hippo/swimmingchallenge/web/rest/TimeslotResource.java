@@ -99,11 +99,9 @@ public class TimeslotResource {
     public ResponseEntity<Timeslot> eraseTimeslot(@PathVariable Long id) {
         log.debug("REST request to get Timeslot : {}", id);
         Timeslot timeslot = timeslotService.eraseTimeslot(id);
-        return Optional.ofNullable(timeslot)
-            .map(result -> new ResponseEntity<>(
-                result,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createAlert("Le créneau a bien été supprimé", ""))
+            .body(timeslot);
     }
 
     /**
