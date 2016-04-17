@@ -1,12 +1,13 @@
 <div>
     <div class="row">
         <div class="col-md-10">
-            <h2>Planning de la soirée</h2>
+            <h3 style="margin-top:2px;">Réservation de créneaux pour la soirée</h3>
         </div>
         <div class="col-md-2" ng-if="vm.connected">
             <span class="badge badge-reserved" data-tooltip="Créneaux réservés">{{vm.user.nbReserved}}</span>
             <span class="badge badge-payed" data-tooltip="Créneaux payés">{{vm.user.nbPayed}}</span>
-            <button type="button" class="btn" ui-sref="print" ng-if="vm.user.nbReserved">
+            <button type="button" class="btn" ui-sref="print" ng-disabled="!vm.user.nbReserved"
+                    data-tooltip="Impression de votre coupon réservation">
                 Imprimer
             </button>
         </div>
@@ -14,7 +15,7 @@
     <h5>Ci dessous se trouve le planning de la soirée de natation pour le Défi Anthony.</h5>
     <h5>Pour réserver un nouveau créneau, vous pouvez cliquer sur un créneau disponible.</h5>
 
-    <div class="panel-group">
+    <div class="panel-group" style="margin-bottom: 10px;">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h4 class="panel-title">
