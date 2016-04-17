@@ -26,15 +26,13 @@
         vm.timeslotsByTime = {};
         vm.userCreationType = userCreationTypes.CURRENT;
         vm.userCreationTypes = userCreationTypes;
-        if (vm.isAuthenticated()) {
-            vm.users = User.query();
-        }
 
         activate();
 
         function activate() {
             loadAll();
             loadUser();
+            loadUsers();
         }
 
         function loadAll() {
@@ -63,6 +61,12 @@
                 vm.user = account;
                 vm.connected = account !== null;
             });
+        }
+
+        function loadUsers() {
+            if (vm.isAuthenticated()) {
+                vm.users = User.query();
+            }
         }
 
         function refresh() {
@@ -101,6 +105,7 @@
             if (vm.userCreationType === userCreationTypes.CURRENT) {
                 vm.user.nbReserved++;
             }
+            loadUsers();
         }
 
         function onSaveError(result) {
@@ -128,7 +133,9 @@
         function eraseTimeslot() {
             if (confirm('Etes-vous sûr de vouloir supprimer cette réservation ?')) {
                 Timeslot.erase({id: vm.currentTimeslot.id}, {}, function(timeslot) {
-                    vm.currentTimeslot = timeslot;
+                    for(var p in timeslot) {
+                        vm.currentTimeslot[p] = timeslot[p];
+                    }
                 });
             }
         }

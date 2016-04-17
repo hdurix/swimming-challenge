@@ -76,7 +76,7 @@ public class MailService {
     @Async
     public void sendActivationEmail(User user, String baseUrl) {
         log.debug("Sending activation e-mail to '{}'", user.getEmail());
-        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Locale locale = Locale.FRANCE;
         Context context = new Context(locale);
         context.setVariable("user", user);
         context.setVariable("baseUrl", applicationUrl);
@@ -88,7 +88,7 @@ public class MailService {
     @Async
     public void sendCreationEmail(User user, String baseUrl) {
         log.debug("Sending creation e-mail to '{}'", user.getEmail());
-        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Locale locale = Locale.FRANCE;
         Context context = new Context(locale);
         context.setVariable("user", user);
         context.setVariable("baseUrl", applicationUrl);
@@ -100,7 +100,7 @@ public class MailService {
     @Async
     public void sendPasswordResetMail(User user, String baseUrl) {
         log.debug("Sending password reset e-mail to '{}'", user.getEmail());
-        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Locale locale = Locale.FRANCE;
         Context context = new Context(locale);
         context.setVariable("user", user);
         context.setVariable("baseUrl", applicationUrl);
@@ -112,7 +112,7 @@ public class MailService {
     @Async
     public void sendSocialRegistrationValidationEmail(User user, String provider) {
         log.debug("Sending social registration validation e-mail to '{}'", user.getEmail());
-        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Locale locale = Locale.FRANCE;
         Context context = new Context(locale);
         context.setVariable("user", user);
         context.setVariable("provider", WordUtils.capitalize(provider));
@@ -124,7 +124,7 @@ public class MailService {
     @Async
     public void sendPayedEmail(User user, Integer price, List<Timeslot> timeslots) {
         log.debug("Sending payed e-mail to '{}'", user.getEmail());
-        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Locale locale = Locale.FRANCE;
         Context context = new Context(locale);
         context.setVariable("user", user);
         context.setVariable("applicationUrl", applicationUrl);
@@ -143,7 +143,7 @@ public class MailService {
     @Async
     public void sendReminderEmail(User user, Integer price, List<Timeslot> timeslots) {
         log.debug("Sending reminder e-mail to '{}'", user.getEmail());
-        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Locale locale = Locale.FRANCE;
         Context context = new Context(locale);
         context.setVariable("user", user);
         context.setVariable("applicationUrl", applicationUrl);

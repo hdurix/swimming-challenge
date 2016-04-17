@@ -340,6 +340,7 @@ html {
 
 .well.challenge-well {
     background-color: #E5E6F7;
+    margin: 10px 0px;
 }
 
 .badge.badge-reserved {
