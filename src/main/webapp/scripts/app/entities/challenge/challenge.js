@@ -8,7 +8,7 @@ angular.module('swimmingchallengeApp')
                 url: '/',
                 data: {
                     authorities: [],
-                    pageTitle: 'Challenge'
+                    pageTitle: 'Défi Natation'
                 },
                 views: {
                     'content@': {

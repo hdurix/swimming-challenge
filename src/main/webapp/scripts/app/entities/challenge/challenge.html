@@ -43,8 +43,8 @@
 
             <form class="form-horizontal form-challenge form-challenge-static" ng-if="vm.currentTimeslot.reserved">
                 <h4>Créneau {{vm.currentTimeslot.payed ? "payé" : "réservé"}}
-                    <span has-authority="ROLE_ADMIN"> le
-                        {{vm.currentTimeslot.reservedDate.substring(8,10)}}/{{vm.currentTimeslot.reservedDate.substring(5,7)}}/{{vm.currentTimeslot.reservedDate.substring(0,4)}}
+                    <span has-authority="ROLE_ADMIN" ng-if="!vm.currentTimeslot.payed"> le
+                        {{vm.currentTimeslot.reservedDate | date:"dd/MM/yyyy"}}
                     </span>
                     par {{vm.currentTimeslot.user.displayName}}
                     <button type="button" ng-click="vm.eraseTimeslot()" has-authority="ROLE_ADMIN"

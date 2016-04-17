@@ -11,12 +11,14 @@
             <table class="table table-striped">
                 <thead>
                     <th>Capitaine</th>
+                    <th>Réservé le</th>
                     <th>Prix</th>
                     <th>Valider</th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="user in vm.usersWithReserves">
                        <td>{{user.displayName}}</td>
+                       <td>{{user.reservedDate | date:"dd/MM/yyyy"}}</td>
                        <td>{{user.nbReserved}} x 9 = {{user.nbReserved * 9}} €</td>
                        <td>
                            <button type="button" class="btn btn-success" ng-click="vm.hasPay(user)">

@@ -7,6 +7,7 @@ import fr.hippo.swimmingchallenge.domain.User;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 /**
@@ -49,6 +50,7 @@ public class UserDTO {
 
     private Long nbReserved;
     private Long nbPayed;
+    private LocalDate reservedDate;
 
     public UserDTO() {
     }
@@ -58,7 +60,12 @@ public class UserDTO {
             user.getDisplayName(), user.getEmail(), user.getActivated(), user.getLangKey(),
             user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
         nbPayed = user.getTimeslots().stream().filter(Timeslot::getPayed).count();
-        nbReserved = user.getTimeslots().stream().filter(Timeslot::getReserved).count() - nbPayed;
+        nbReserved = user.getTimeslots().size() - nbPayed;
+        reservedDate = user.getTimeslots().stream()
+            .filter(t -> !t.getPayed())
+            .map(Timeslot::getReservedDate)
+            .min(LocalDate::compareTo)
+            .orElse(null);
     }
 
     public UserDTO(Long id, String login, String password, String firstName, String lastName,
@@ -122,6 +129,10 @@ public class UserDTO {
 
     public Long getNbPayed() {
         return nbPayed;
+    }
+
+    public LocalDate getReservedDate() {
+        return reservedDate;
     }
 
     @Override
