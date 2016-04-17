@@ -62,3 +62,9 @@ jhipster:
             host: localhost
             port: 2003
             prefix: swimmingChallenge
+
+application:
+    url: http://localhost:8080
+
+scheduling:
+    reminderEmails: 0 55 18 * * *

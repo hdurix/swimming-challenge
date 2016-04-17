@@ -1,0 +1,70 @@
+<div>
+    <h2>Soirée Défi Natation du 9 Juillet 2016</h2>
+    <p>
+        Rappel de vos équipes engagées non payées :
+    </p>
+    <table class="table">
+        <thead>
+            <th>Créneau</th>
+            <th>Nom d'équipe</th>
+            <th>Nageur 1</th>
+            <th>Nageur 2</th>
+            <th>Nageur 3</th>
+            <th>Nageur 4</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="timeslot in vm.timeslots">
+                <td>{{timeslot.startTime}} - {{timeslot.endTime}}</td>
+                <td>{{timeslot.teamName}}</td>
+                <td>{{timeslot.swimmer1}}</td>
+                <td>{{timeslot.swimmer2}}</td>
+                <td>{{timeslot.swimmer3}}</td>
+                <td>{{timeslot.swimmer4}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        Merci d’envoyer le bulletin d’inscription et le règlement par chèque à l’ordre de "<i>Défi ANTHONY</i>" à :
+    </p>
+    <div class="row text-center">
+        <div class="col-xs-5"><b>Salon Evolu’tifs</b><br>2 Rue Centrale,<br>71170 Chauffailles</div>
+        <div class="col-xs-2">OU</div>
+        <div class="col-xs-5"><b>Mme Anne LUCCIONI</b><br>Chalaye,<br>71170 Chauffailles</div>
+    </div>
+
+    <p style="padding-top:20px;">
+        N'oubliez pas d'indiquer le nombre de repas et de calculer le total du règlement à joindre au coupon ci-dessous.
+    </p>
+
+    <p style="padding-top:10px;">
+        La réservation finale de ces créneaux ne sera effective qu'après réception de ce coupon accompagné du paiement.
+        Les organisateurs de cette soirée annuleront cette réservation si aucun règlement n'est reçu sous 8 jours.
+    </p>
+
+    <div class="text-center" style="padding:15px 0;">
+        &#9986;------------------------------­­­­­­­­­------------­­­­­­­­­--------­­­­­­­­­­­­­­­­­---------------------------------------------------------------------
+    </div>
+
+    <p>
+        <b>Capitaine : </b>{{vm.timeslots[0].user.displayName}}
+    </p>
+    <p ng-repeat="timeslot in vm.timeslots">
+        <b>Equipe {{$index + 1}} : </b>{{timeslot.teamName}} ({{timeslot.startTime}} - {{timeslot.endTime}} - Ligne {{timeslot.line}})
+    </p>
+    <p>
+        <b>Nombre de créneaux réservés : </b>{{vm.timeslots.length}}
+    </p>
+    <p>
+        <b>Sous Total - Inscriptions : </b>{{vm.timeslots.length}} x 9 euros = {{vm.timeslots.length * 9}} euros
+    </p>
+    <p>
+        <b>Nombre de repas :</b>
+    </p>
+    <p>
+        <b>Sous Total - Repas : </b> ..... x 10 euros = ..... euros
+    </p>
+    <p style="padding-top:10px;">
+        <b>TOTAL (Inscriptions + Repas) : </b>{{vm.timeslots.length * 9}} euros + ..... x 10 euros = ..... euros
+    </p>
+</div>

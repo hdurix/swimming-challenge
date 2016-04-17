@@ -70,6 +70,19 @@ public class TimeslotResource {
     }
 
     /**
+     * GET  /timeslots -> get all the user timeslots.
+     */
+    @RequestMapping(value = "/timeslots",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE,
+        params = "userTimeslots")
+    @Timed
+    @PermitAll
+    public List<Timeslot> getUserTimeslots() {
+        return timeslotService.findUserTimeslots();
+    }
+
+    /**
      * GET  /timeslots/:id -> get the "id" timeslot.
      */
     @RequestMapping(value = "/timeslots/{id}",

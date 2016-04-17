@@ -16,6 +16,8 @@ import java.util.Objects;
 @Table(name = "timeslot")
 public class Timeslot implements Serializable {
 
+    public static final Integer TIMESLOT_PRICE = 9;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -225,6 +227,7 @@ public class Timeslot implements Serializable {
         swimmer2 = null;
         swimmer3 = null;
         swimmer4 = null;
+        reservedDate = null;
         user = null;
     }
 }

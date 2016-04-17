@@ -4,21 +4,48 @@
             <h2>Planning de la soirée</h2>
         </div>
         <div class="col-md-2" ng-if="vm.connected">
-            <span class="badge badge-reserved">{{vm.user.nbReserved}}</span>
-            <span class="badge badge-payed">{{vm.user.nbPayed}}</span>
-            <button type="button" class="btn" ng-click="vm.print()">
+            <span class="badge badge-reserved" data-tooltip="Créneaux réservés">{{vm.user.nbReserved}}</span>
+            <span class="badge badge-payed" data-tooltip="Créneaux payés">{{vm.user.nbPayed}}</span>
+            <button type="button" class="btn" ui-sref="print" ng-if="vm.user.nbReserved">
                 Imprimer
             </button>
         </div>
     </div>
     <h5>Ci dessous se trouve le planning de la soirée de natation pour le Défi Anthony.</h5>
     <h5>Pour réserver un nouveau créneau, vous pouvez cliquer sur un créneau disponible.</h5>
+
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse1">Pour plus de renseignement, cliquez ici</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>Pour le défi ANTHONY, jetez-vous à l’eau avec le Club de NATATION de Chauffailles.</p>
+                    <p>TOUS ENSEMBLE, additionnons nos longueurs pour aller le plus loin possible : 10, 20, 50, 100… km</p>
+                    <p>Composez une équipe de 1 à 4 nageurs maximum avec un capitaine nageur ou non.</p>
+                    <p>
+                        La réservation finale de ces créneaux ne sera effective qu'après réception du règlement (bouton en haut à droite Impression).
+                        <br>
+                        Les organisateurs de cette soirée annuleront cette réservation si aucun règlement n'est reçu sous 8 jours.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div ng-if="vm.currentTimeslot" class="well challenge-well well-sm row">
 
         <div ng-if="vm.currentTimeslot.reserved">
 
             <form class="form-horizontal form-challenge form-challenge-static" ng-if="vm.currentTimeslot.reserved">
-                <h4>Créneau {{vm.currentTimeslot.payed ? "payé" : "réservé"}} par {{vm.currentTimeslot.user.displayName}}
+                <h4>Créneau {{vm.currentTimeslot.payed ? "payé" : "réservé"}}
+                    <span has-authority="ROLE_ADMIN"> le
+                        {{vm.currentTimeslot.reservedDate.substring(8,10)}}/{{vm.currentTimeslot.reservedDate.substring(5,7)}}/{{vm.currentTimeslot.reservedDate.substring(0,4)}}
+                    </span>
+                    par {{vm.currentTimeslot.user.displayName}}
                     <button type="button" ng-click="vm.eraseTimeslot()" has-authority="ROLE_ADMIN"
                             class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-remove-circle"></span>

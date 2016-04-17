@@ -1,11 +1,13 @@
 package fr.hippo.swimmingchallenge.service;
 
 import fr.hippo.swimmingchallenge.config.JHipsterProperties;
+import fr.hippo.swimmingchallenge.domain.Timeslot;
 import fr.hippo.swimmingchallenge.domain.User;
-
 import org.apache.commons.lang.CharEncoding;
+import org.apache.commons.lang.WordUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -13,11 +15,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.apache.commons.lang.WordUtils;
-
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -43,6 +44,9 @@ public class MailService {
 
     @Inject
     private SpringTemplateEngine templateEngine;
+
+    @Value("${application.url}")
+    private String applicationUrl;
 
     /**
      * System default email address that sends the e-mails.
@@ -104,7 +108,7 @@ public class MailService {
         String subject = messageSource.getMessage("email.reset.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
     }
-    
+
     @Async
     public void sendSocialRegistrationValidationEmail(User user, String provider) {
         log.debug("Sending social registration validation e-mail to '{}'", user.getEmail());
@@ -115,5 +119,43 @@ public class MailService {
         String content = templateEngine.process("socialRegistrationValidationEmail", context);
         String subject = messageSource.getMessage("email.social.registration.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
+    }
+
+    @Async
+    public void sendPayedEmail(User user, Integer price, List<Timeslot> timeslots) {
+        log.debug("Sending payed e-mail to '{}'", user.getEmail());
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable("user", user);
+        context.setVariable("applicationUrl", applicationUrl);
+        context.setVariable("price", price);
+        context.setVariable("timeslots", timeslots);
+        String content = templateEngine.process("payedEmail", context);
+        String subject = "Confirmation d'inscription soirée Défi Natation (payement reçu)";
+        if (user.getEmail() == null) {
+            log.error("L'utilisateur {} ne possède pas d'email, impossible de lui envoyer un mail de confirmation.",
+                user.getLogin());
+        } else {
+            sendEmail(user.getEmail(), subject, content, false, true);
+        }
+    }
+
+    @Async
+    public void sendReminderEmail(User user, Integer price, List<Timeslot> timeslots) {
+        log.debug("Sending reminder e-mail to '{}'", user.getEmail());
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable("user", user);
+        context.setVariable("applicationUrl", applicationUrl);
+        context.setVariable("price", price);
+        context.setVariable("timeslots", timeslots);
+        String content = templateEngine.process("reminderEmail", context);
+        String subject = "Inscription défi natation en attente";
+        if (user.getEmail() == null) {
+            log.error("L'utilisateur {} ne possède pas d'email, impossible de lui envoyer un mail de rappel.",
+                user.getLogin());
+        } else {
+            sendEmail(user.getEmail(), subject, content, false, true);
+        }
     }
 }

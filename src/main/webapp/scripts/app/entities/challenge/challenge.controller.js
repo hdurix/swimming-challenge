@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('swimmingchallengeApp')
-        .controller('ChallengeController', TimeslotController);
+        .controller('ChallengeController', ChallengeController);
 
-    function TimeslotController(Timeslot, Principal, User, AlertService, $rootScope, $state, $filter) {
+    function ChallengeController(Timeslot, Principal, User, AlertService, $rootScope, $state, $filter) {
 
         var vm = this;
 

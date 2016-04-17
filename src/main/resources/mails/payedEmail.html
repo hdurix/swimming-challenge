@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Inscription défi natation payée</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p>
+            Bonjour <span th:text="${user.firstName}"></span>,
+        </p>
+        <p>
+            Votre inscription à la <a href="${applicationUrl}">soirée Défi Natation</a> du 9 juillet a bien été prise en compte.
+        </p>
+        <p>
+            Le montant de votre inscription (<span th:text="${price}"></span> euros) a bien été réçu
+            par les organisateurs et va pouvoir être reversé au <a href="http://www.defi-anthony.org">Defi Anthony</a>.
+        </p>
+        <p>
+            Rappel de vos équipes engagées :
+            <table>
+                <tr th:each="timeslot,iterationStatus : ${timeslots}">
+                    <td><span th:text="${timeslot.startTime}"></span> - <span th:text="${timeslot.endTime}"></span></td>
+                    <td th:text="${timeslot.teamName}" style="padding-left: 10px;"></td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            Merci à vous pour votre participation et rendez-vous le 9 Juillet !
+        </p>
+        <p>
+            <span>Cordialement, </span>
+            <br/>
+            <em><a href="http://natationchauffailles.e-monsite.com/">Le club de natation de Chauffailles.</a></em>
+        </p>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Inscription défi natation en attente</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p>
+            Bonjour <span th:text="${user.firstName}"></span>,
+        </p>
+        <p>
+            Votre inscription à la <a href="${applicationUrl}">soirée Défi Natation</a> du 9 juillet n'a pas encore été prise en compte.
+        </p>
+        <p>
+            Le montant de votre inscription (<span th:text="${price}"></span> euros) n'a pas encore été reçu
+            par les organisateurs afin de pouvoir être reversé au <a href="http://www.defi-anthony.org">Defi Anthony</a>.
+        </p>
+        <p>
+            Rappel de vos équipes engagées :
+            <table>
+                <tr th:each="timeslot,iterationStatus : ${timeslots}">
+                    <td><span th:text="${timeslot.startTime}"></span> - <span th:text="${timeslot.endTime}"></span></td>
+                    <td th:text="${timeslot.teamName}" style="padding-left: 10px;"></td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            Si vous ne souhaitez plus participer à cette soirée, vous pouvez l'indiquer en répondant à cet e-mail.
+        </p>
+        <p>
+            Si vous avez déjà envoyé votre participation, désolé pour cet e-mail, elle sera bientôt prise en compte.
+        </p>
+        <p>
+            Merci à vous pour votre participation et rendez-vous le 9 Juillet !
+        </p>
+        <p>
+            <span>Cordialement, </span>
+            <br/>
+            <em><a href="http://natationchauffailles.e-monsite.com/">Le club de natation de Chauffailles.</a></em>
+        </p>
+    </body>
+</html>
