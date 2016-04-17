@@ -72,3 +72,6 @@ jhipster:
         contact:
         license:
         licenseUrl:
+
+scheduling:
+    reminderEmails: 0 0 0 * * *
