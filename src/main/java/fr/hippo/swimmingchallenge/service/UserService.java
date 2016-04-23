@@ -238,12 +238,17 @@ public class UserService {
      * </p>
      */
     @Scheduled(cron = "0 0 1 * * ?")
+    @Transactional
     public void removeNotActivatedUsers() {
         ZonedDateTime now = ZonedDateTime.now();
         List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minusDays(3));
         for (User user : users) {
-            log.debug("Deleting not activated user {}", user.getLogin());
-            userRepository.delete(user);
+            if (!user.getTimeslots().isEmpty()) {
+                log.debug("Deleting not activated user {}", user.getLogin());
+                userRepository.delete(user);
+            } else {
+                log.debug("Not deleting not activated user {}", user.getLogin());
+            }
         }
     }
 }

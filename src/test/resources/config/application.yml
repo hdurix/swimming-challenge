@@ -73,5 +73,8 @@ jhipster:
         license:
         licenseUrl:
 
+application:
+    url: http://localhost:8080
+
 scheduling:
     reminderEmails: 0 0 0 * * *

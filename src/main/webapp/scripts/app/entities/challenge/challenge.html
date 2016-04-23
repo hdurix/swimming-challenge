@@ -56,38 +56,38 @@
                 <div class="row">
                     <div class="col-sm-7">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Créneau</label>
-                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
+                            <label class="col-xs-3 control-label">Créneau</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Ligne</label>
-                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
+                            <label class="col-xs-3 control-label">Ligne</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Nom d'équipe</label>
-                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.teamName}}</p></div>
+                            <label class="col-xs-3 control-label">Nom d'équipe</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.teamName}}</p></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Capitaine</label>
-                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.user.displayName}}</p></div>
+                            <label class="col-xs-3 control-label">Capitaine</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.user.displayName}}</p></div>
                         </div>
                     </div>
                     <div class="col-sm-5">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Nageur 1</label>
-                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer1}}</p></div>
+                            <label class="col-xs-3 control-label">Nageur 1</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer1}}</p></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Nageur 2</label>
-                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer2}}</p></div>
+                            <label class="col-xs-3 control-label">Nageur 2</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer2}}</p></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Nageur 3</label>
-                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer3}}</p></div>
+                            <label class="col-xs-3 control-label">Nageur 3</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer3}}</p></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Nageur 4</label>
-                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer4}}</p></div>
+                            <label class="col-xs-3 control-label">Nageur 4</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.swimmer4}}</p></div>
                         </div>
                     </div>
                 </div>
@@ -102,12 +102,12 @@
                 <div ng-if="!vm.connected">
                     <form class="form-horizontal form-challenge form-challenge-static">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Créneau</label>
-                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
+                            <label class="col-xs-3 control-label">Créneau</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Ligne</label>
-                            <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
+                            <label class="col-xs-3 control-label">Ligne</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
                         </div>
                     </form>
                     Pour continuer la réservation de ce créneau, merci de bien vouloir vous
@@ -120,15 +120,15 @@
                             <div class="col-sm-7">
                                 <form class="form-horizontal form-challenge form-challenge-static">
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Créneau</label>
-                                        <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
+                                        <label class="col-xs-3 control-label">Créneau</label>
+                                        <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Ligne</label>
-                                        <div class="col-sm-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
+                                        <label class="col-xs-3 control-label">Ligne</label>
+                                        <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
                                     </div>
                                     <div class="form-group" has-authority="ROLE_ADMIN">
-                                        <label class="col-sm-3 control-label">Capitaine</label>
+                                        <label class="col-xs-3 control-label">Capitaine</label>
                                         <div class="col-sm-4">
                                             <select class="form-control" ng-model="vm.userCreationType"
                                                     ng-options="userType as userType.label for userType in vm.userCreationTypes">
@@ -166,36 +166,36 @@
                             <div class="col-sm-5">
                                 <form class="form-horizontal form-challenge">
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="field_teamName">Nom d'équipe</label>
-                                        <div class="col-sm-9">
+                                        <label class="col-xs-3 control-label" for="field_teamName">Nom d'équipe</label>
+                                        <div class="col-xs-9">
                                             <input type="text" class="form-control input-sm" name="teamName" id="field_teamName"
                                                    ng-model="vm.currentTimeslot.teamName"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="field_swimmer1">Nageur 1</label>
-                                        <div class="col-sm-9">
+                                        <label class="col-xs-3 control-label" for="field_swimmer1">Nageur 1</label>
+                                        <div class="col-xs-9">
                                             <input type="text" class="form-control input-sm" name="swimmer1" id="field_swimmer1"
                                                    ng-model="vm.currentTimeslot.swimmer1"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="field_swimmer2">Nageur 2</label>
-                                        <div class="col-sm-9">
+                                        <label class="col-xs-3 control-label" for="field_swimmer2">Nageur 2</label>
+                                        <div class="col-xs-9">
                                             <input type="text" class="form-control input-sm" name="swimmer2" id="field_swimmer2"
                                                    ng-model="vm.currentTimeslot.swimmer2"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="field_swimmer3">Nageur 3</label>
-                                        <div class="col-sm-9">
+                                        <label class="col-xs-3 control-label" for="field_swimmer3">Nageur 3</label>
+                                        <div class="col-xs-9">
                                             <input type="text" class="form-control input-sm" name="swimmer3" id="field_swimmer3"
                                                    ng-model="vm.currentTimeslot.swimmer3"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="field_swimmer4">Nageur 4</label>
-                                        <div class="col-sm-9">
+                                        <label class="col-xs-3 control-label" for="field_swimmer4">Nageur 4</label>
+                                        <div class="col-xs-9">
                                             <input type="text" class="form-control input-sm" name="swimmer4" id="field_swimmer4"
                                                    ng-model="vm.currentTimeslot.swimmer4"/>
                                         </div>

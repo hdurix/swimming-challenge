@@ -90,7 +90,7 @@ Browser Upgrade Prompt
     display: inline-block;
     width: 86px;
     height: 34px;
-    background: url("../images/club_natation.gif") no-repeat center;
+    background: url("../images/club_natation.png") no-repeat center;
     background-size: contain;
     margin: 5px;
 }
@@ -315,6 +315,12 @@ html {
     background-color: #f5f5f5;
 }
 
+@media (max-width: 768px) {
+    .challenge-table th {
+        font-size: smaller;
+        font-weight: normal;
+    }
+}
 .challenge-table .challenge-td {
     border: thin #e8e8e8 solid;
     cursor: pointer;
