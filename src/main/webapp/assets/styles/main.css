@@ -355,3 +355,17 @@ html {
 .badge.badge-payed {
     background-color: #96FF8F;
 }
+
+.bs-callout {
+    padding: 10px 5px 10px 15px;
+    margin: 5px 5px 10px 5px;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+.bs-callout-info {
+    border-left-color: #1b809e;
+}
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
