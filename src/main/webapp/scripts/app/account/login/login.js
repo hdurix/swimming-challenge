@@ -7,8 +7,8 @@ angular.module('swimmingchallengeApp')
                 parent: 'account',
                 url: '/login',
                 data: {
-                    authorities: [], 
-                    pageTitle: 'Sign in'
+                    authorities: [],
+                    pageTitle: 'Connexion'
                 },
                 views: {
                     'content@': {
@@ -17,7 +17,7 @@ angular.module('swimmingchallengeApp')
                     }
                 },
                 resolve: {
-                    
+
                 }
             });
     });

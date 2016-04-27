@@ -369,3 +369,8 @@ html {
 .bs-callout-success {
     border-left-color: #5cb85c;
 }
+.main-rule {
+    color: #1F58FF;
+    font-weight: bold;
+    text-transform: uppercase;
+}
