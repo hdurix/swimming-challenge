@@ -8,7 +8,7 @@ angular.module('swimmingchallengeApp')
                 url: '/social-register/:provider?{success:boolean}',
                 data: {
                     authorities: [],
-                    pageTitle: 'Register with {{ label }}'
+                    pageTitle: 'Connexion avec {{providerLabel}}'
                 },
                 views: {
                     'content@': {
@@ -17,7 +17,7 @@ angular.module('swimmingchallengeApp')
                     }
                 },
                 resolve: {
-                    
+
                 }
             });
     });
