@@ -164,12 +164,11 @@ public class UserResource {
     @Transactional(readOnly = true)
     public ResponseEntity<List<ManagedUserDTO>> getAllUsers(Pageable pageable)
         throws URISyntaxException {
-        Page<User> page = userRepository.findAll(pageable);
-        List<ManagedUserDTO> managedUserDTOs = page.getContent().stream()
+        List<User> users = userRepository.findAll();
+        List<ManagedUserDTO> managedUserDTOs = users.stream()
             .map(user -> new ManagedUserDTO(user))
             .collect(Collectors.toList());
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
-        return new ResponseEntity<>(managedUserDTOs, headers, HttpStatus.OK);
+        return new ResponseEntity<>(managedUserDTOs, HttpStatus.OK);
     }
 
     /**
