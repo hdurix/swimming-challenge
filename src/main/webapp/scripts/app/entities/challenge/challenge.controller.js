@@ -38,7 +38,7 @@
         function loadAll() {
             Timeslot.query(function (timeslots) {
                 timeslots = $filter('orderBy')(timeslots, 'startTime');
-                var hours = ["18", "19"];
+                var hours = ["18", "19", "20"];
                 _.each(hours, function(hour) {
                     var hourTS = _.filter(timeslots, function(ts) { return ts.startTime.substring(0, 2) == hour; });
                     var byTime = _.groupBy(hourTS, function(ts) { return ts.startTime + ' - ' + ts.endTime; });
