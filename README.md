@@ -1,5 +1,7 @@
 # swimmingChallenge
 
+### --- This application is now running in production: https://defi-natation.noip.me ---
+
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
