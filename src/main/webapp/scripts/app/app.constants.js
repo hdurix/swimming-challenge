@@ -4,6 +4,6 @@ angular.module('swimmingchallengeApp')
 
 .constant('ENV', 'dev')
 
-.constant('VERSION', '0.1')
+.constant('VERSION', '2.0')
 
 ;

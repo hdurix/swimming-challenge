@@ -39,14 +39,14 @@
 
         function loadAll() {
             Timeslot.query(function (timeslots) {
-                timeslots = timeslots.filter(t => t.line <= vm.maxLine);
+                timeslots = _.filter(timeslots, function(ts) { return ts.line <= vm.maxLine; });
                 timeslots = $filter('orderBy')(timeslots, 'startTime');
                 var runnings = [true, false];
                 _.each(runnings, function(running) {
                     var hourTS = _.filter(timeslots, function(ts) { return ts.running === running; });
                     var byTime = _.groupBy(hourTS, function(ts) { return ts.startTime; });
                     var byLine = _.groupBy(hourTS, 'line');
-                    vm.timeslotsByRunning[running] = {byTime, byLine};
+                    vm.timeslotsByRunning[running] = {byTime: byTime, byLine: byLine};
                 });
                 loadTimeslot(timeslots);
             });
