@@ -14,7 +14,7 @@ public class GenerateTest {
 
         int id = 0;
 
-        System.out.println("id;start_time;end_time;payed;reserved;line;running;version");
+        System.out.println("INSERT INTO public.timeslot (id, start_time, end_time, payed, reserved, line, running, version) VALUES");
 
         for (int hour = 8; hour < 13; hour++) {
             for (int min = 0; hour == 12 ? min < 15: min < 60; min+=15) {
@@ -23,7 +23,7 @@ public class GenerateTest {
                     int heureFin = (min == 45 ? hour + 1: hour);
                     String fin = (heureFin < 10 ? "0" : "") + heureFin + ":" + (min == 45 ? "00" : min + 15);
                     boolean run = id < 6 * NB_CRENEAU;
-                    System.out.println(id++ + ";" + debut + ";" + fin + ";0;0;" + cre + ";" + run + ";0");
+                    System.out.println("(" + id++ + ",'" + debut + "','" + fin + "',0,0," + cre + "," + run + ",0),");
                 }
             }
         }

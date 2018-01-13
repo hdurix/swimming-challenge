@@ -73,10 +73,7 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
-        <loadData encoding="UTF-8"
-                  file="config/liquibase/timeslots.csv"
-                  separator=";"
-                  tableName="timeslot"/>
+        <sqlFile path="../insert_timeslots.sql" encoding="UTF-8" relativeToChangelogFile="true"/>
 
     </changeSet>
 </databaseChangeLog>
