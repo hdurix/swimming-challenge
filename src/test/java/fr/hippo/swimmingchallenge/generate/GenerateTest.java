@@ -23,7 +23,7 @@ public class GenerateTest {
                     int heureFin = (min == 45 ? hour + 1: hour);
                     String fin = (heureFin < 10 ? "0" : "") + heureFin + ":" + (min == 45 ? "00" : min + 15);
                     boolean run = id < 6 * NB_CRENEAU;
-                    System.out.println("(" + id++ + ",'" + debut + "','" + fin + "',0,0," + cre + "," + run + ",0),");
+                    System.out.println("(" + id++ + ",'" + debut + "','" + fin + "',false,false," + cre + "," + run + ",0),");
                 }
             }
         }
