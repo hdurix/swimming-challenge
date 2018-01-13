@@ -68,6 +68,11 @@
         },
         {
             "fieldId": 10,
+            "fieldName": "swimmer5",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 11,
             "fieldName": "line",
             "fieldType": "Integer",
             "fieldValidateRules": [
@@ -75,7 +80,7 @@
             ]
         },
 		{
-            "fieldId": 11,
+            "fieldId": 12,
             "fieldName": "version",
             "fieldType": "Long",
             "fieldValidateRules": [

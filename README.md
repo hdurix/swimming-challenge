@@ -1,6 +1,6 @@
 # swimmingChallenge
 
-#### --- This application is now running in production: https://defi-natation.noip.me ---
+#### --- This application is now running in production: https://defi-anthony-chauffailles.fr ---
 
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
 

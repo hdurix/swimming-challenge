@@ -15,6 +15,7 @@
         };
 
         vm.clear = clear;
+        vm.clickOnTimeslot = clickOnTimeslot;
         vm.eraseTimeslot = eraseTimeslot;
         vm.getClass = getClass;
         vm.getTooltip = getTooltip;
@@ -23,9 +24,10 @@
         vm.loadAll = loadAll;
         vm.refresh = refresh;
         vm.saveTimeslot = saveTimeslot;
-        vm.timeslotsByTime = {};
+        vm.timeslotsByRunning = {};
         vm.userCreationType = userCreationTypes.CURRENT;
         vm.userCreationTypes = userCreationTypes;
+        vm.maxLine = 10;
 
         activate();
 
@@ -37,13 +39,14 @@
 
         function loadAll() {
             Timeslot.query(function (timeslots) {
+                timeslots = timeslots.filter(t => t.line <= vm.maxLine);
                 timeslots = $filter('orderBy')(timeslots, 'startTime');
-                var hours = ["18", "19", "20"];
-                _.each(hours, function(hour) {
-                    var hourTS = _.filter(timeslots, function(ts) { return ts.startTime.substring(0, 2) == hour; });
-                    var byTime = _.groupBy(hourTS, function(ts) { return ts.startTime + ' - ' + ts.endTime; });
+                var runnings = [true, false];
+                _.each(runnings, function(running) {
+                    var hourTS = _.filter(timeslots, function(ts) { return ts.running === running; });
+                    var byTime = _.groupBy(hourTS, function(ts) { return ts.startTime; });
                     var byLine = _.groupBy(hourTS, 'line');
-                    vm.timeslotsByTime["time" + hour] = {byTime : byTime, byLine: byLine};
+                    vm.timeslotsByRunning[running] = {byTime, byLine};
                 });
                 loadTimeslot(timeslots);
             });
@@ -130,6 +133,19 @@
             Timeslot.update(vm.currentTimeslot, onSaveSuccess, onSaveError);
         }
 
+        function clickOnTimeslot(timeslot) {
+            vm.currentTimeslot = timeslot;
+            if (!vm.currentTimeslot.reserved && !vm.connected) {
+                AlertService.add({
+                    type: "warning",
+                    msg: "Pour continuer la réservation de ce créneau, merci de bien vouloir vous connecter (voir plus haut)",
+                    timeout: 3000,
+                    toast: true,
+                    position: 'bottom'
+                });
+            }
+        }
+
         function eraseTimeslot() {
             if (confirm('Etes-vous sûr de vouloir supprimer cette réservation ?')) {
                 Timeslot.erase({id: vm.currentTimeslot.id}, {}, function(timeslot) {
@@ -151,6 +167,7 @@
                 swimmer2: null,
                 swimmer3: null,
                 swimmer4: null,
+                swimmer5: null,
                 reservedDate: null,
                 line: null,
                 version: null,

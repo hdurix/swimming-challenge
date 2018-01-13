@@ -19,7 +19,7 @@
                     <tr ng-repeat="user in vm.usersWithReserves">
                        <td>{{user.displayName}}</td>
                        <td>{{user.reservedDate | date:"dd/MM/yyyy"}}</td>
-                       <td>{{user.nbReserved}} x 9 = {{user.nbReserved * 9}} €</td>
+                       <td>{{user.nbReserved}} x 10 = {{user.nbReserved * 10}} €</td>
                        <td>
                            <button type="button" class="btn btn-success" ng-click="vm.hasPay(user)">
                                <span class="glyphicon glyphicon-ok"></span>

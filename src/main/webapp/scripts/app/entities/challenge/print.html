@@ -1,5 +1,5 @@
 <div>
-    <h2>Soirée Défi Natation du 9 Juillet 2016</h2>
+    <h2>Journée Défi "Je marche ou je cours" du 27 mai 2016</h2>
     <p>
         Rappel de vos équipes engagées non payées :
     </p>
@@ -7,10 +7,11 @@
         <thead>
             <th>Créneau</th>
             <th>Nom d'équipe</th>
-            <th>Nageur 1</th>
-            <th>Nageur 2</th>
-            <th>Nageur 3</th>
-            <th>Nageur 4</th>
+            <th>Participant 1</th>
+            <th>Participant 2</th>
+            <th>Participant 3</th>
+            <th>Participant 4</th>
+            <th>Participant 5</th>
         </thead>
         <tbody>
             <tr ng-repeat="timeslot in vm.timeslots">
@@ -20,6 +21,7 @@
                 <td>{{timeslot.swimmer2}}</td>
                 <td>{{timeslot.swimmer3}}</td>
                 <td>{{timeslot.swimmer4}}</td>
+                <td>{{timeslot.swimmer5}}</td>
             </tr>
         </tbody>
     </table>
@@ -39,7 +41,7 @@
 
     <p style="padding-top:10px;">
         La réservation finale de ces créneaux ne sera effective qu'après réception de ce coupon accompagné du paiement.
-        Les organisateurs de cette soirée annuleront cette réservation si aucun règlement n'est reçu sous 8 jours.
+        Les organisateurs de cette journée annuleront cette réservation si aucun règlement n'est reçu sous 8 jours.
     </p>
 
     <div class="text-center" style="padding:15px 0;">
@@ -55,7 +57,7 @@
     <p>
         <b>Nombre de créneaux réservés : </b>{{vm.timeslots.length}}
         <br>
-        <b>Sous Total - Inscriptions : </b>{{vm.timeslots.length}} x 9 euros = {{vm.timeslots.length * 9}} euros
+        <b>Sous Total - Inscriptions : </b>{{vm.timeslots.length}} x 10 euros = {{vm.timeslots.length * 10}} euros
     </p>
     <p style="padding-top:5px;">
         <b>Nombre de repas :</b>
@@ -63,6 +65,6 @@
         <b>Sous Total - Repas : </b> ..... x 10 euros = ..... euros
     </p>
     <p style="padding-top:10px;">
-        <b>TOTAL (Inscriptions + Repas) : </b>{{vm.timeslots.length * 9}} euros + ..... x 10 euros = ..... euros
+        <b>TOTAL (Inscriptions + Repas) : </b>{{vm.timeslots.length * 10}} euros + ..... x 10 euros = ..... euros
     </p>
 </div>

@@ -16,7 +16,7 @@ import java.util.Objects;
 @Table(name = "timeslot")
 public class Timeslot implements Serializable {
 
-    public static final Integer TIMESLOT_PRICE = 9;
+    public static final Integer TIMESLOT_PRICE = 10;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,6 +53,9 @@ public class Timeslot implements Serializable {
     @Column(name = "swimmer4")
     private String swimmer4;
 
+    @Column(name = "swimmer5")
+    private String swimmer5;
+
     @Column(name = "reserved_date")
     private LocalDate reservedDate;
 
@@ -68,6 +71,9 @@ public class Timeslot implements Serializable {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(name = "running")
+    private boolean running;
 
     public Long getId() {
         return id;
@@ -149,6 +155,14 @@ public class Timeslot implements Serializable {
         this.swimmer4 = swimmer4;
     }
 
+    public String getSwimmer5() {
+        return swimmer5;
+    }
+
+    public void setSwimmer5(String swimmer5) {
+        this.swimmer5 = swimmer5;
+    }
+
     public LocalDate getReservedDate() {
         return reservedDate;
     }
@@ -179,6 +193,14 @@ public class Timeslot implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
     }
 
     @Override
@@ -214,6 +236,7 @@ public class Timeslot implements Serializable {
             ", swimmer2='" + swimmer2 + "'" +
             ", swimmer3='" + swimmer3 + "'" +
             ", swimmer4='" + swimmer4 + "'" +
+            ", swimmer5='" + swimmer5 + "'" +
             ", line='" + line + "'" +
             ", version='" + version + "'" +
             '}';
@@ -227,6 +250,7 @@ public class Timeslot implements Serializable {
         swimmer2 = null;
         swimmer3 = null;
         swimmer4 = null;
+        swimmer5 = null;
         reservedDate = null;
         user = null;
     }

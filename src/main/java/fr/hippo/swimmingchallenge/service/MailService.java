@@ -131,7 +131,7 @@ public class MailService {
         context.setVariable("price", price);
         context.setVariable("timeslots", timeslots);
         String content = templateEngine.process("payedEmail", context);
-        String subject = "Confirmation d'inscription soirée Défi Natation (payement reçu)";
+        String subject = "Confirmation d'inscription journée Défi \"Je marche ou je cours\" (payement reçu)";
         if (user.getEmail() == null) {
             log.error("L'utilisateur {} ne possède pas d'email, impossible de lui envoyer un mail de confirmation.",
                 user.getLogin());
@@ -150,7 +150,7 @@ public class MailService {
         context.setVariable("price", price);
         context.setVariable("timeslots", timeslots);
         String content = templateEngine.process("reminderEmail", context);
-        String subject = "Inscription défi natation en attente";
+        String subject = "Inscription Défi \"Je marche ou je cours\" en attente";
         if (user.getEmail() == null) {
             log.error("L'utilisateur {} ne possède pas d'email, impossible de lui envoyer un mail de rappel.",
                 user.getLogin());

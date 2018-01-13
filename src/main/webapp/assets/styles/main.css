@@ -86,14 +86,6 @@ Browser Upgrade Prompt
     background-size: contain;
     margin: 5px;
 }
-.club-natation {
-    display: inline-block;
-    width: 86px;
-    height: 34px;
-    background: url("../images/club_natation.png") no-repeat center;
-    background-size: contain;
-    margin: 5px;
-}
 
 .pad {
     padding: 10px;

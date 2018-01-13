@@ -47,9 +47,15 @@
 
             <column name="swimmer4" type="varchar(255)"/>
 
+            <column name="swimmer5" type="varchar(255)"/>
+
             <column name="reserved_date" type="date"/>
 
             <column name="line" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="running" type="bit">
                 <constraints nullable="false" />
             </column>
 

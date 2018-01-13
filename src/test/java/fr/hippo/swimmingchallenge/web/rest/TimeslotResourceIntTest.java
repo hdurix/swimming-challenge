@@ -62,6 +62,8 @@ public class TimeslotResourceIntTest {
     private static final String UPDATED_SWIMMER3 = "BBBBB";
     private static final String DEFAULT_SWIMMER4 = "AAAAA";
     private static final String UPDATED_SWIMMER4 = "BBBBB";
+    private static final String DEFAULT_SWIMMER5 = "AAAAA";
+    private static final String UPDATED_SWIMMER5 = "BBBBB";
 
     private static final Integer DEFAULT_LINE = 1;
     private static final Integer UPDATED_LINE = 2;
@@ -107,6 +109,7 @@ public class TimeslotResourceIntTest {
         timeslot.setSwimmer2(DEFAULT_SWIMMER2);
         timeslot.setSwimmer3(DEFAULT_SWIMMER3);
         timeslot.setSwimmer4(DEFAULT_SWIMMER4);
+        timeslot.setSwimmer5(DEFAULT_SWIMMER5);
         timeslot.setLine(DEFAULT_LINE);
         timeslot.setVersion(DEFAULT_VERSION);
     }

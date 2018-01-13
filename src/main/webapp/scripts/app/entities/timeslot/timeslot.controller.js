@@ -41,6 +41,7 @@
                 swimmer2: null,
                 swimmer3: null,
                 swimmer4: null,
+                swimmer5: null,
                 line: null,
                 version: null,
                 id: null

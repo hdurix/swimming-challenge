@@ -21,7 +21,7 @@
         }
 
         function hasPay(user) {
-            AlertService.success("L'utilisateur a bien payé ses " + (user.nbReserved * 9) + " €");
+            AlertService.success("L'utilisateur a bien payé ses " + (user.nbReserved * 10) + " €");
             Timeslot.hasPay({userId: user.id});
             vm.usersWithReserves = _.without(vm.usersWithReserves, user);
         }
