@@ -128,11 +128,11 @@
                 <div class="row">
                     <div class="col-sm-7">
                         <div class="form-group">
-                            <label class="col-xs-3 control-label">Créneau</label>
-                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
+                            <label class="col-xs-3 control-label">Départ</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}}</p></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-3 control-label">Ligne</label>
+                            <label class="col-xs-3 control-label">N°</label>
                             <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
                         </div>
                         <div class="form-group">
@@ -178,11 +178,11 @@
                 <div ng-if="!vm.connected">
                     <form class="form-horizontal form-challenge form-challenge-static">
                         <div class="form-group">
-                            <label class="col-xs-3 control-label">Créneau</label>
-                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
+                            <label class="col-xs-3 control-label">Départ</label>
+                            <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}}</p></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-3 control-label">Ligne</label>
+                            <label class="col-xs-3 control-label">N°</label>
                             <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
                         </div>
                     </form>
@@ -196,11 +196,11 @@
                             <div class="col-sm-7">
                                 <form class="form-horizontal form-challenge form-challenge-static">
                                     <div class="form-group">
-                                        <label class="col-xs-3 control-label">Créneau</label>
-                                        <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}} - {{vm.currentTimeslot.endTime}}</p></div>
+                                        <label class="col-xs-3 control-label">Départ</label>
+                                        <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.startTime}}</p></div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-xs-3 control-label">Ligne</label>
+                                        <label class="col-xs-3 control-label">N°</label>
                                         <div class="col-xs-9"><p class="form-control-static">{{vm.currentTimeslot.line}}</p></div>
                                     </div>
                                     <div class="form-group" has-authority="ROLE_ADMIN">
@@ -303,7 +303,7 @@
         <table class="jh-table table challenge-table">
             <thead>
             <tr>
-                <th>Ligne</th>
+                <th></th>
                 <th class="text-center" ng-repeat="(time, timeslots) in tbt.byTime">
                     {{time}}
                 </th>

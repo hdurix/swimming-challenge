@@ -5,7 +5,7 @@
     </p>
     <table class="table">
         <thead>
-            <th>Créneau</th>
+            <th>Départ</th>
             <th>Nom d'équipe</th>
             <th>Participant 1</th>
             <th>Participant 2</th>
@@ -15,7 +15,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="timeslot in vm.timeslots">
-                <td>{{timeslot.startTime}} - {{timeslot.endTime}}</td>
+                <td>{{timeslot.startTime}}</td>
                 <td>{{timeslot.teamName}}</td>
                 <td>{{timeslot.swimmer1}}</td>
                 <td>{{timeslot.swimmer2}}</td>
@@ -52,7 +52,7 @@
         <b>Capitaine : </b>{{vm.timeslots[0].user.displayName}}
     </p>
     <p ng-repeat="timeslot in vm.timeslots">
-        <b>Equipe {{$index + 1}} : </b>{{timeslot.teamName}} ({{timeslot.startTime}} - {{timeslot.endTime}} - Ligne {{timeslot.line}})
+        <b>Equipe {{$index + 1}} : </b>{{timeslot.teamName}} ({{timeslot.startTime}} - N° {{timeslot.line}})
     </p>
     <p>
         <b>Nombre de créneaux réservés : </b>{{vm.timeslots.length}}

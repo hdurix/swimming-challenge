@@ -27,7 +27,10 @@
         vm.timeslotsByRunning = {};
         vm.userCreationType = userCreationTypes.CURRENT;
         vm.userCreationTypes = userCreationTypes;
-        vm.maxLine = 10;
+        vm.maxLineByRunning = {
+            true: 8,
+            false: 8
+        };
 
         activate();
 
@@ -39,11 +42,10 @@
 
         function loadAll() {
             Timeslot.query(function (timeslots) {
-                timeslots = _.filter(timeslots, function(ts) { return ts.line <= vm.maxLine; });
                 timeslots = $filter('orderBy')(timeslots, 'startTime');
                 var runnings = [true, false];
                 _.each(runnings, function(running) {
-                    var hourTS = _.filter(timeslots, function(ts) { return ts.running === running; });
+                    var hourTS = _.filter(timeslots, function(ts) { return ts.running === running && ts.line <= vm.maxLineByRunning[running]; });
                     var byTime = _.groupBy(hourTS, function(ts) { return ts.startTime; });
                     var byLine = _.groupBy(hourTS, 'line');
                     vm.timeslotsByRunning[running] = {byTime: byTime, byLine: byLine};
