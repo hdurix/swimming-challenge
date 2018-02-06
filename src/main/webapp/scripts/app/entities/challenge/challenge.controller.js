@@ -140,7 +140,7 @@
             if (!vm.currentTimeslot.reserved && !vm.connected) {
                 AlertService.add({
                     type: "warning",
-                    msg: "Pour continuer la réservation de ce créneau, merci de bien vouloir vous connecter (voir plus haut)",
+                    msg: "Pour continuer la réservation de ce créneau, merci de bien vouloir vous connecter (voir l'encadré de réservation au dessus des tableaux)",
                     timeout: 3000,
                     toast: true,
                     position: 'bottom'

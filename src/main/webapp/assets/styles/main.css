@@ -366,3 +366,7 @@ html {
     font-weight: bold;
     text-transform: uppercase;
 }
+
+.panel-group .panel {
+    margin-bottom: 10px;
+}

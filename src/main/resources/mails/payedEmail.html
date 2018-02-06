@@ -19,7 +19,7 @@
             Rappel de vos équipes engagées :
             <table>
                 <tr th:each="timeslot,iterationStatus : ${timeslots}">
-                    <td><span th:text="${timeslot.startTime}"></span> - <span th:text="${timeslot.endTime}"></span></td>
+                    <td><span th:text="${timeslot.startTime}"></span></td>
                     <td th:text="${timeslot.teamName}" style="padding-left: 10px;"></td>
                 </tr>
             </table>
