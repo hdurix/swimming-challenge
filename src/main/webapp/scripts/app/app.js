@@ -21,7 +21,7 @@ angular.module('swimmingchallengeApp', ['LocalStorageModule',
         });
 
         $rootScope.$on('$stateChangeSuccess',  function(event, toState, toParams, fromState, fromParams) {
-            var titleKey = 'Défi "Je marche ou je cours"' ;
+            var titleKey = 'Défi "Tout ce qui roule"' ;
 
             // Remember previous state unless we've been redirected to login or we've just
             // reset the state memory after logout. If we're redirected to login, our

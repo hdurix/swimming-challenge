@@ -8,7 +8,7 @@ angular.module('swimmingchallengeApp')
                 url: '/',
                 data: {
                     authorities: [],
-                    pageTitle: 'Défi "Je marche ou je cours"'
+                    pageTitle: 'Défi "Tout ce qui roule"'
                 },
                 views: {
                     'content@': {

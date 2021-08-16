@@ -43,7 +43,7 @@
         function loadAll() {
             Timeslot.query(function (timeslots) {
                 timeslots = $filter('orderBy')(timeslots, 'startTime');
-                var runnings = [true, false];
+                var runnings = [false, true];
                 _.each(runnings, function(running) {
                     var hourTS = _.filter(timeslots, function(ts) { return ts.running === running && ts.line <= vm.maxLineByRunning[running]; });
                     var byTime = _.groupBy(hourTS, function(ts) { return ts.startTime; });

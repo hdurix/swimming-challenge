@@ -7,7 +7,7 @@ import org.junit.Test;
  */
 public class GenerateTest {
 
-    public static final int NB_CRENEAU = 30;
+    public static final int NB_CRENEAU = 20;
 
     @Test
     public void writeTimeSlot() {
@@ -16,13 +16,13 @@ public class GenerateTest {
 
         System.out.println("INSERT INTO public.timeslot (id, start_time, end_time, payed, reserved, line, running, version) VALUES");
 
-        for (int hour = 8; hour < 13; hour++) {
-            for (int min = 0; hour == 12 ? min < 15: min < 60; min+=15) {
+        for (int hour = 16; hour < 19; hour++) {
+            for (int min = 0; hour == 18 ? min < 45: min < 60; min+=15) {
                 for (int cre = 1; cre <= NB_CRENEAU; cre++) {
                     String debut = (hour < 10 ? "0" : "") + hour + ":" + (min < 10 ? "0" : "") + min;
                     int heureFin = (min == 45 ? hour + 1: hour);
                     String fin = (heureFin < 10 ? "0" : "") + heureFin + ":" + (min == 45 ? "00" : min + 15);
-                    boolean run = id < 6 * NB_CRENEAU;
+                    boolean run = hour == 18 && min == 30;
                     System.out.println("(" + id++ + ",'" + debut + "','" + fin + "',false,false," + cre + "," + run + ",0),");
                 }
             }

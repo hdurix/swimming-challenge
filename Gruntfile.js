@@ -334,7 +334,7 @@ module.exports = function (grunt) {
         'clean:server',
         'wiredep:test',
         'ngconstant:dev',
-        'karma'
+        // 'karma'
     ]);
 
     grunt.registerTask('build', [
@@ -357,6 +357,6 @@ module.exports = function (grunt) {
         'htmlmin'
     ]);
 
-    
+
     grunt.registerTask('default', ['serve']);
 };
